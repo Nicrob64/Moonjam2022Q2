@@ -1,0 +1,20 @@
+{
+    "Items" : [
+        {
+            "ItemName" : "Smug",
+            "TexturePath" : "Textures/smug"
+        },
+        {
+            "ItemName" : "Smerg",
+            "TexturePath" : "Textures/smerg"
+        },
+        {
+            "ItemName" : "Suffer",
+            "TexturePath" : "Textures/suffer"
+        },
+        {
+            "ItemName" : "moon2T",
+            "TexturePath" : "Textures/moon2T"
+        }
+    ]
+}
