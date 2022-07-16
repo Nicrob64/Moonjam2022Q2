@@ -1,16 +1,22 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(CharacterController), typeof(PlayerInputHandler))]
 public class PlayerCharacterController : MonoBehaviour
 {
-    [Header("References")] [Tooltip("Reference to the main camera used for the player")]
+    [Header("References")]
+    [Tooltip("Reference to the main camera used for the player")]
     public Camera PlayerCamera;
 
-    // [Tooltip("Audio source for footsteps, jump, etc...")]
-    // public AudioSource AudioSource;
+    [Tooltip("Audio source for footsteps, jump, etc...")]
+    public AudioSource AudioSource;
 
-    [Header("General")] [Tooltip("Force applied downward when in the air")]
+    [Header("General")]
+    [Tooltip("The distance at which the player can pick up an object")]
+    public float PickupDistance = 1.0f;
+
+    [Tooltip("Force applied downward when in the air")]
     public float GravityDownForce = 20f;
 
     [Tooltip("Physic layers checked to consider the player grounded")]
@@ -187,6 +193,11 @@ public class PlayerCharacterController : MonoBehaviour
         UpdateCharacterHeight(false);
 
         HandleCharacterMovement();
+
+        if(m_InputHandler.GetInteractInputReleased())
+        {
+            HandleInteractPressed();
+        }
     }
 
     void OnDie()
@@ -233,6 +244,28 @@ public class PlayerCharacterController : MonoBehaviour
                         m_Controller.Move(Vector3.down * hit.distance);
                     }
                 }
+            }
+        }
+    }
+
+    void HandleInteractPressed()
+    {
+        Ray ray = PlayerCamera.ViewportPointToRay(Vector3.one / 2f);
+        Debug.DrawRay(ray.origin, ray.direction * 2f, Color.red);
+
+        RaycastHit hitInfo;
+        if(Physics.Raycast(ray, out hitInfo, PickupDistance))
+        {
+            var hitItem = hitInfo.collider.GetComponent<ItemPickup>();
+
+            if(hitItem == null)
+            {
+                return;
+            }
+            else
+            {
+                Debug.Log(String.Format("Picked up item {0}", hitItem.itemName));
+                GetComponent<Inventory>().items.Add(hitItem.itemName);
             }
         }
     }

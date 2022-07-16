@@ -38,8 +38,8 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (CanProcessInput())
         {
-            Vector3 move = new Vector3(Input.GetAxisRaw(GameConstants.k_AxisNameHorizontal), 0f,
-                Input.GetAxisRaw(GameConstants.k_AxisNameVertical));
+            Vector3 move = new Vector3(Input.GetAxisRaw(GameConstants.AxisNameHorizontal), 0f,
+                Input.GetAxisRaw(GameConstants.AxisNameVertical));
 
             // constrain move input to a maximum magnitude of 1, otherwise diagonal movement might exceed the max move speed defined
             move = Vector3.ClampMagnitude(move, 1);
@@ -52,19 +52,19 @@ public class PlayerInputHandler : MonoBehaviour
 
     public float GetLookInputsHorizontal()
     {
-        return GetMouseLookAxis(GameConstants.k_MouseAxisNameHorizontal);
+        return GetMouseLookAxis(GameConstants.MouseAxisNameHorizontal);
     }
 
     public float GetLookInputsVertical()
     {
-        return GetMouseLookAxis(GameConstants.k_MouseAxisNameVertical);
+        return GetMouseLookAxis(GameConstants.MouseAxisNameVertical);
     }
 
     public bool GetJumpInputDown()
     {
         if (CanProcessInput())
         {
-            return Input.GetButtonDown(GameConstants.k_ButtonNameJump);
+            return Input.GetButtonDown(GameConstants.ButtonNameJump);
         }
 
         return false;
@@ -74,7 +74,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (CanProcessInput())
         {
-            return Input.GetButton(GameConstants.k_ButtonNameJump);
+            return Input.GetButton(GameConstants.ButtonNameJump);
         }
 
         return false;
@@ -84,7 +84,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (CanProcessInput())
         {
-            return Input.GetButton(GameConstants.k_ButtonNameSprint);
+            return Input.GetButton(GameConstants.ButtonNameSprint);
         }
 
         return false;
@@ -94,7 +94,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (CanProcessInput())
         {
-            return Input.GetButtonDown(GameConstants.k_ButtonNameCrouch);
+            return Input.GetButtonDown(GameConstants.ButtonNameCrouch);
         }
 
         return false;
@@ -104,7 +104,17 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (CanProcessInput())
         {
-            return Input.GetButtonUp(GameConstants.k_ButtonNameCrouch);
+            return Input.GetButtonUp(GameConstants.ButtonNameCrouch);
+        }
+
+        return false;
+    }
+
+    public bool GetInteractInputReleased()
+    {
+        if(CanProcessInput())
+        {
+            return Input.GetButtonUp(GameConstants.ButtonNameInteract);
         }
 
         return false;
