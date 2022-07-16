@@ -26,6 +26,8 @@ public struct QTEButton
 public class QTEScript : MonoBehaviour
 {
 
+    // Mapping from Unity KeyCodes to the corresponding symbols in the 212 Keyboard font
+    // BUG: Characters that require a key combo like ? (shift + /) are not accepted by the input logic
     public static Dictionary<KeyCode, char> KeyCodeMap = new Dictionary<KeyCode, char>()
     {
         {KeyCode.Backspace, 'h'},
@@ -107,7 +109,7 @@ public class QTEScript : MonoBehaviour
     public TextMeshProUGUI textMesh;
 
     // Grace period during which the player can successfully press the button after the initial delay
-    public float gracePeriod = 2.0f;
+    public float gracePeriod = 1.0f;
 
     // true if the QTE is currently running
     bool active = false;
@@ -146,6 +148,7 @@ public class QTEScript : MonoBehaviour
         textMesh.text = new string(c, 1);
     }
 
+    // Start displaying the QTE
     public void Activate()
     {
         active = true;
@@ -154,6 +157,8 @@ public class QTEScript : MonoBehaviour
 
         UpdateText();        
     }
+
+    // End the QTE. Happens automatically when all of the button prompts play out.
 
     public void Deactivate()
     {
