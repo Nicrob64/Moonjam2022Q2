@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(TextAsset))]
@@ -13,10 +14,15 @@ public class PickableItemManager : MonoBehaviour
     {
         ItemList = JsonUtility.FromJson<ListOfPickableItems>(ItemInfoFile.text);
 
+        // Randomize the order of the list so that pickable items are distributed randomly
+        var rand = new System.Random();
+        ItemList.Items = ItemList.Items.OrderBy(_ => rand.Next()).ToList();
+
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("PickableItem");
 
-        foreach(var gameObject in gameObjects)
+        for(int i = 0; i < gameObjects.Length; ++i)
         {
+            var gameObject = gameObjects[i];
             var item = gameObject.GetComponent<PickableItem>();
             if(item == null)
             {
@@ -24,16 +30,10 @@ public class PickableItemManager : MonoBehaviour
                 continue;
             }
 
-            PickableItemInfo info = GetRandomItem();
+            PickableItemInfo info = ItemList.Items[i % ItemList.Items.Count];
             Debug.Log(string.Format("Set {0} item value to {1} {2}", item, info.ItemName, info.TexturePath));
             item.ItemInfo = info;
         }
-    }
-
-    public PickableItemInfo GetRandomItem()
-    {
-        int rando = Random.Range(0, ItemList.Items.Count);
-        return ItemList.Items[rando];
     }
 
     // Start is called before the first frame update

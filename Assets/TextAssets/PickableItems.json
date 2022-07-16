@@ -15,6 +15,38 @@
         {
             "ItemName" : "moon2T",
             "TexturePath" : "Textures/moon2T"
+        },
+        {
+            "ItemName" : "Lube, 55 Gallon Drum",
+            "TexturePath" : "Textures/55gal"
+        },
+        {
+            "ItemName" : "CUM T-Shirt",
+            "TexturePath" : "Textures/cumshirt"
+        },
+        {
+            "ItemName" : "Champion's Club Sunglasses",
+            "TexturePath" : "Textures/docglasses"
+        },
+        {
+            "ItemName" : "Noomnoom Wall Sign",
+            "TexturePath" : "Textures/noomnoomsign"
+        },
+        {
+            "ItemName" : "Oedipus Rex Hardcover Book",
+            "TexturePath" : "Textures/oedipus"
+        },
+        {
+            "ItemName" : "Suzuki Teriyaki Body Pillow",
+            "TexturePath" : "Textures/pillow"
+        },
+        {
+            "ItemName" : "RTX 3090",
+            "TexturePath" : "Textures/RTX"
+        },
+        {
+            "ItemName" : "Furry Tail, Kitsune Style",
+            "TexturePath" : "Textures/tail"
         }
     ]
 }
