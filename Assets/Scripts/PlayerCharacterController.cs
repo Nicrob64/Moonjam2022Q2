@@ -256,7 +256,7 @@ public class PlayerCharacterController : MonoBehaviour
         RaycastHit hitInfo;
         if(Physics.Raycast(ray, out hitInfo, PickupDistance))
         {
-            var hitItem = hitInfo.collider.GetComponent<ItemPickup>();
+            var hitItem = hitInfo.collider.GetComponent<PickableItem>();
 
             if(hitItem == null)
             {
@@ -264,8 +264,8 @@ public class PlayerCharacterController : MonoBehaviour
             }
             else
             {
-                Debug.Log(String.Format("Picked up item {0}", hitItem.itemName));
-                GetComponent<Inventory>().items.Add(hitItem.itemName);
+                Debug.Log(String.Format("Picked up item {0}", hitItem.ItemInfo.ItemName));
+                GetComponent<Inventory>().items.Add(hitItem.ItemInfo.ItemName);
             }
         }
     }
