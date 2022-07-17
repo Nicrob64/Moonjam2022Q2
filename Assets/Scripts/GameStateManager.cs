@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameStateManager : MonoBehaviour
 {
 
+    public int OrdersRemainingForDailyQuota = 5;
+
     public const float TimePerRoundInSeconds = 300f; // 5 minutes
 
     public float RemainingTimeInRound = TimePerRoundInSeconds;

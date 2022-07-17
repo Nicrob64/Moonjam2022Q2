@@ -1,4 +1,5 @@
-﻿using System;
+﻿// Taken from Unity FPS template, with some edits
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -43,6 +44,18 @@ public class PlayerCharacterController : MonoBehaviour
 
     [Tooltip("Multiplicator for the sprint speed (based on grounded speed)")]
     public float SprintSpeedModifier = 2f;
+
+    [Tooltip("Maximum amount of stamina that the player has. Stamina is required to sprint.")]
+    public float MaxStamina = 100f;
+
+    [Tooltip("Amount of stamina drained per second when sprinting.")]
+    public float StaminaDrainPerSecond = 20f;
+
+    [Tooltip("Amount of stamina recovered per second when not sprinting.")]
+    public float StaminaRecoveredPerSecond = 10f;
+
+    [Tooltip("Minimum stamina level at which sprint can be used again after exhausting stamina.")]
+    public float StaminaCooldownMinimum = 50f;
 
     [Tooltip("Height at which the player dies instantly when falling off the map")]
     public float KillHeight = -50f;
@@ -105,6 +118,8 @@ public class PlayerCharacterController : MonoBehaviour
     public bool IsDead { get; private set; }
     public bool IsCrouching { get; private set; }
 
+    public float Stamina { get; private set; }
+
     public float RotationMultiplier
     {
         get
@@ -123,6 +138,7 @@ public class PlayerCharacterController : MonoBehaviour
     float m_CameraVerticalAngle = 0f;
     float m_FootstepDistanceCounter;
     float m_TargetCharacterHeight;
+    private bool m_StaminaCooldown = false;
 
     const float k_JumpGroundingPreventionTime = 0.2f;
     const float k_GroundCheckDistanceInAir = 0.07f;
@@ -143,6 +159,8 @@ public class PlayerCharacterController : MonoBehaviour
         m_Controller.enableOverlapRecovery = true;
 
         // m_Health.OnDie += OnDie;
+
+        Stamina = MaxStamina;
 
         // force the crouch state to false when starting
         SetCrouchingState(false, true);
@@ -175,12 +193,12 @@ public class PlayerCharacterController : MonoBehaviour
                 // m_Health.TakeDamage(dmgFromFall, null);
 
                 // fall damage SFX
-                // AudioSource.PlayOneShot(FallDamageSfx);
+                AudioSource.PlayOneShot(FallDamageSfx);
             }
             else
             {
                 // land SFX
-                // AudioSource.PlayOneShot(LandSfx);
+                AudioSource.PlayOneShot(LandSfx);
             }
         }
 
@@ -283,11 +301,20 @@ public class PlayerCharacterController : MonoBehaviour
         }
 
         // character movement handling
-        bool isSprinting = m_InputHandler.GetSprintInputHeld();
+        bool isSprinting = CanSprint() && m_InputHandler.GetSprintInputHeld();
         {
             if (isSprinting)
             {
                 isSprinting = SetCrouchingState(false, false);
+                Stamina -= StaminaDrainPerSecond * Time.deltaTime;
+            }
+            else if(Stamina < MaxStamina)
+            {
+                Stamina += StaminaRecoveredPerSecond * Time.deltaTime;
+                if(Stamina > StaminaCooldownMinimum)
+                {
+                    m_StaminaCooldown = false;
+                }
             }
 
             float speedModifier = isSprinting ? SprintSpeedModifier : 1f;
@@ -323,7 +350,7 @@ public class PlayerCharacterController : MonoBehaviour
                         CharacterVelocity += Vector3.up * JumpForce;
 
                         // play sound
-                        // AudioSource.PlayOneShot(JumpSfx);
+                        AudioSource.PlayOneShot(JumpSfx);
 
                         // remember last time we jumped because we need to prevent snapping to ground for a short time
                         m_LastTimeJumped = Time.time;
@@ -341,7 +368,7 @@ public class PlayerCharacterController : MonoBehaviour
                 if (m_FootstepDistanceCounter >= 1f / chosenFootstepSfxFrequency)
                 {
                     m_FootstepDistanceCounter = 0f;
-                    // AudioSource.PlayOneShot(FootstepSfx);
+                    AudioSource.PlayOneShot(FootstepSfx);
                 }
 
                 // keep track of distance traveled for footsteps sound
@@ -380,6 +407,19 @@ public class PlayerCharacterController : MonoBehaviour
 
             CharacterVelocity = Vector3.ProjectOnPlane(CharacterVelocity, hit.normal);
         }
+    }
+
+    bool CanSprint()
+    {
+        if(m_StaminaCooldown) return false;
+        
+        if(Stamina < 1.0f)
+        {
+            m_StaminaCooldown = true;
+            return false;
+        }
+
+        return true;
     }
 
     // Returns true if the slope angle represented by the given normal is under the slope angle limit of the character controller

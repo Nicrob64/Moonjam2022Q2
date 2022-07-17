@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿// Taken from Unity FPS template, with some edits
+using UnityEngine;
 
 public class PlayerInputHandler : MonoBehaviour
 {
