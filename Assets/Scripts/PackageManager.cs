@@ -6,7 +6,6 @@ public class PackageManager : MonoBehaviour
 {
     ListOfPeople listOfPeople;
     public TextAsset peopleFile;
-    public BoxLabel boxLabel;
 
     void Awake()
     {
@@ -18,18 +17,4 @@ public class PackageManager : MonoBehaviour
         int rando = Random.Range(0, listOfPeople.people.Count);
         return listOfPeople.GetPerson(rando);
     }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            UpdateBoxLabel();
-        }
-    }
-
-    void UpdateBoxLabel()
-    {
-        boxLabel.SetDetails(GetRandomPerson());
-    }
-    
 }

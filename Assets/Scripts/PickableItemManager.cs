@@ -64,6 +64,7 @@ public class PickableItemManager : MonoBehaviour
     {
         if(listSize > ItemList.Items.Count)
         {
+            //We should be able to duplicate items though, I want to order 80 tails ya dig
             throw new ArgumentException(String.Format(
                 "Cannot create a list of {0} items as there are only {1} unique items",
                 listSize,
@@ -82,18 +83,5 @@ public class PickableItemManager : MonoBehaviour
         shoppingList.Items = randomizedItems;
 
         return shoppingList;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        // var items = GenerateShoppingList(3);
-        // Debug.Log(JsonUtility.ToJson(items));
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
