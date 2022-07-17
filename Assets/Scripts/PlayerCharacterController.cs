@@ -112,6 +112,9 @@ public class PlayerCharacterController : MonoBehaviour
     [Tooltip("Damage recieved when falling at the maximum speed")]
     public float FallDamageAtMaxSpeed = 50f;
 
+    [Tooltip("If true, the player cannot move, but can still look around.")]
+    public bool MovementFrozen = false;
+
     public Vector3 CharacterVelocity { get; set; }
     public bool IsGrounded { get; private set; }
     public bool HasJumpedThisFrame { get; private set; }
@@ -318,6 +321,11 @@ public class PlayerCharacterController : MonoBehaviour
 
             float speedModifier = isSprinting ? SprintSpeedModifier : 1f;
 
+            if(MovementFrozen)
+            {
+                speedModifier = 0;
+            }
+
             // converts move input to a worldspace vector based on our character's transform orientation
             Vector3 worldspaceMoveInput = transform.TransformVector(m_InputHandler.GetMoveInput());
 
@@ -410,7 +418,7 @@ public class PlayerCharacterController : MonoBehaviour
 
     bool CanSprint()
     {
-        if(m_StaminaCooldown) return false;
+        if(m_StaminaCooldown || MovementFrozen) return false;
         
         if(Stamina < 1.0f)
         {

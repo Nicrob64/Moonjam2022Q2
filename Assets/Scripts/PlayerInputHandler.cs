@@ -25,11 +25,6 @@ public class PlayerInputHandler : MonoBehaviour
         Cursor.visible = false;
     }
 
-    void LateUpdate()
-    {
-        // m_FireInputWasHeld = GetFireInputHeld();
-    }
-
     public bool CanProcessInput()
     {
         return Cursor.lockState == CursorLockMode.Locked;
