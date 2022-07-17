@@ -1852,6 +1852,7 @@ GameObject:
   - component: {fileID: 1685538591}
   - component: {fileID: 1685538593}
   - component: {fileID: 1685538592}
+  - component: {fileID: 1685538594}
   m_Layer: 5
   m_Name: ShoppingListText
   m_TagString: Untagged
@@ -1978,6 +1979,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1685538590}
   m_CullTransparentMesh: 1
+--- !u!114 &1685538594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685538590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19ce9fa8b3b8230419146ae53d48080c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1713249650
 GameObject:
   m_ObjectHideFlags: 0
