@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Piss : MonoBehaviour
 {
@@ -59,6 +60,9 @@ public class Piss : MonoBehaviour
         {
             // You pissed yourself!
             Debug.LogWarning("You pissed yourself!");
+            PlayerController.gameObject.SetActive(false);
+
+            SceneManager.LoadScene("GameOver");
         }
     }
 }
