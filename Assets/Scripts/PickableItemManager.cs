@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,28 @@ using UnityEngine;
 public class PickableItemManager : MonoBehaviour
 {
 
+    private static PickableItemManager _instance;
+
+    public static PickableItemManager Instance
+    {
+        get { return _instance; }
+    }
+
     public TextAsset ItemInfoFile;
     ListOfPickableItems ItemList;
 
     void Awake()
     {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        else
+        {
+            _instance = this;
+        }
+
         ItemList = JsonUtility.FromJson<ListOfPickableItems>(ItemInfoFile.text);
 
         // Randomize the order of the list so that pickable items are distributed randomly
@@ -36,10 +54,41 @@ public class PickableItemManager : MonoBehaviour
         }
     }
 
+    // public PickableItemInfo GetRandomItem()
+    // {
+    //     int rando = System.Random.Range(0, ItemList.Items.Count);
+    //     return ItemList.Items[rando];
+    // }
+
+    public ListOfPickableItems GenerateShoppingList(ushort listSize)
+    {
+        if(listSize > ItemList.Items.Count)
+        {
+            throw new ArgumentException(String.Format(
+                "Cannot create a list of {0} items as there are only {1} unique items",
+                listSize,
+                ItemList.Items.Count));
+        }
+
+        var rand = new System.Random();
+        var randomizedItems = ItemList.Items.OrderBy(_ => rand.Next()).ToList();
+
+        if(listSize < ItemList.Items.Count)
+        {
+            randomizedItems.RemoveRange(listSize, ItemList.Items.Count - listSize);
+        }
+
+        var shoppingList = new ListOfPickableItems();
+        shoppingList.Items = randomizedItems;
+
+        return shoppingList;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        // var items = GenerateShoppingList(3);
+        // Debug.Log(JsonUtility.ToJson(items));
     }
 
     // Update is called once per frame

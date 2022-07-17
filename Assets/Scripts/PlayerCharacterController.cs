@@ -253,19 +253,19 @@ public class PlayerCharacterController : MonoBehaviour
         Ray ray = PlayerCamera.ViewportPointToRay(Vector3.one / 2f);
         Debug.DrawRay(ray.origin, ray.direction * 2f, Color.red);
 
-        RaycastHit hitInfo;
-        if(Physics.Raycast(ray, out hitInfo, PickupDistance))
+        if(Physics.Raycast(ray, out RaycastHit hitInfo, PickupDistance))
         {
             var hitItem = hitInfo.collider.GetComponent<PickableItem>();
 
-            if(hitItem == null)
+            if(hitItem != null)
             {
-                return;
+                Debug.Log(String.Format("Picked up item {0}", hitItem.ItemInfo.ItemName));
+                // GetComponent<Inventory>().items.Add(hitItem.ItemInfo.ItemName);
             }
             else
             {
-                Debug.Log(String.Format("Picked up item {0}", hitItem.ItemInfo.ItemName));
-                GetComponent<Inventory>().items.Add(hitItem.ItemInfo.ItemName);
+                var interactable = hitInfo.collider.GetComponent<Interactable>();
+                interactable?.Interact();
             }
         }
     }

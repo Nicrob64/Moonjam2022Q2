@@ -5,7 +5,23 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
 
-    public List<string> items;
+    public Dictionary<PickableItemInfo, int> ItemsHeld = new();
+
+    public void RefreshShoppingList()
+    {
+        ItemsHeld.Clear();
+
+        ListOfPickableItems list = PickableItemManager.Instance.GenerateShoppingList(4);
+
+        foreach(var pickableItem in list.Items)
+        {
+            ItemsHeld.Add(pickableItem, 0);
+        }
+
+        Debug.Log(ItemsHeld);
+
+        EventManager.Instance.ShoppingListChanged(ItemsHeld);
+    }
 
     // Start is called before the first frame update
     void Start()
