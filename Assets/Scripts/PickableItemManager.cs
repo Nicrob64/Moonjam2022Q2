@@ -35,7 +35,10 @@ public class PickableItemManager : MonoBehaviour
         // Randomize the order of the list so that pickable items are distributed randomly
         var rand = new System.Random();
         ItemList.Items = ItemList.Items.OrderBy(_ => rand.Next()).ToList();
+    }
 
+    void Start()
+    {
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("PickableItem");
 
         for(int i = 0; i < gameObjects.Length; ++i)
