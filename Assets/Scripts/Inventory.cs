@@ -9,7 +9,11 @@ public class Inventory : MonoBehaviour
 
     public void RefreshShoppingList()
     {
-        ItemsHeld.Clear();
+        // Can only get a new list when the current one has been completed or failed
+        if(ItemsHeld.Count > 0)
+        {
+            return;
+        }
 
         ListOfPickableItems list = PickableItemManager.Instance.GenerateShoppingList(4);
 
@@ -34,6 +38,26 @@ public class Inventory : MonoBehaviour
         ItemsHeld[item] += 1;
 
         EventManager.Instance.ShoppingListChanged(ItemsHeld);
+    }
+
+    public bool ValidateAndClearInventory()
+    {
+        if(ItemsHeld.Count == 0) return false;
+
+        bool result = true;
+
+        foreach(var item in ItemsHeld)
+        {
+            if(item.Value < 1)
+            {
+                result = false;
+            }
+        }
+
+        ItemsHeld.Clear();
+        EventManager.Instance.ShoppingListChanged(ItemsHeld);
+        
+        return result;
     }
 
     void Awake()
