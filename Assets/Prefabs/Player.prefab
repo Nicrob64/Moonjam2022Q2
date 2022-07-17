@@ -10,9 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5985416117277580047}
   - component: {fileID: 5985416117277580046}
+  - component: {fileID: 1251691436691451831}
   - component: {fileID: 5985416117277580042}
   - component: {fileID: 5985416117277580041}
   - component: {fileID: 7616565363902878522}
+  - component: {fileID: 1463406967535659735}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -54,6 +56,102 @@ CharacterController:
   m_SkinWidth: 0.001
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &1251691436691451831
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5985416117277580045}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &5985416117277580042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,19 +181,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerCamera: {fileID: 5985416117364206618}
-  AudioSource: {fileID: 0}
-  PickupDistance: 1
+  AudioSource: {fileID: 1251691436691451831}
+  PickupDistance: 2
   GravityDownForce: 20
   GroundCheckLayers:
     serializedVersion: 2
     m_Bits: 4294967295
   GroundCheckDistance: 0.05
-  MaxSpeedOnGround: 10
+  MaxSpeedOnGround: 13
   MovementSharpnessOnGround: 15
   MaxSpeedCrouchedRatio: 0.5
   MaxSpeedInAir: 10
-  AccelerationSpeedInAir: 25
-  SprintSpeedModifier: 2
+  AccelerationSpeedInAir: 15
+  SprintSpeedModifier: 1.2
+  MaxStamina: 100
+  StaminaDrainPerSecond: 20
+  StaminaRecoveredPerSecond: 10
+  StaminaCooldownMinimum: 50
   KillHeight: -50
   RotationSpeed: 200
   AimingRotationMultiplier: 0.4
@@ -104,17 +206,18 @@ MonoBehaviour:
   CapsuleHeightStanding: 1.8
   CapsuleHeightCrouching: 0.9
   CrouchingSharpness: 10
-  FootstepSfxFrequency: 1
-  FootstepSfxFrequencyWhileSprinting: 1
-  FootstepSfx: {fileID: 0}
-  JumpSfx: {fileID: 0}
-  LandSfx: {fileID: 0}
-  FallDamageSfx: {fileID: 0}
+  FootstepSfxFrequency: 0.3
+  FootstepSfxFrequencyWhileSprinting: 0.2
+  FootstepSfx: {fileID: 8300000, guid: 1e4c3200994621045a69ce7e8914939d, type: 3}
+  JumpSfx: {fileID: 8300000, guid: 3a487f7bbf67ea2479f00393d5016eed, type: 3}
+  LandSfx: {fileID: 8300000, guid: 26982432839105e4d9b823c8ee069b44, type: 3}
+  FallDamageSfx: {fileID: 8300000, guid: 51f42bc2e75229d4da577a490f76c823, type: 3}
   RecievesFallDamage: 0
   MinSpeedForFallDamage: 10
   MaxSpeedForFallDamage: 30
   FallDamageAtMinSpeed: 10
   FallDamageAtMaxSpeed: 50
+  MovementFrozen: 0
 --- !u!114 &7616565363902878522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +230,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9d5e9a4b5619074f974f1a53a2eba23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1463406967535659735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5985416117277580045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78303cdfa43858c4b90a096be67ce962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerController: {fileID: 5985416117277580041}
+  MaxPiss: 100
+  PissGainPerSecond: 1
+  PissGraceTimer: 5
+  PissDuration: 10
 --- !u!1 &5985416117364206623
 GameObject:
   m_ObjectHideFlags: 0

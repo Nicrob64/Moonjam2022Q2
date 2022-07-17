@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿// Taken from Unity FPS template, with some edits
+using UnityEngine;
 
 public class PlayerInputHandler : MonoBehaviour
 {
@@ -22,11 +23,6 @@ public class PlayerInputHandler : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-    }
-
-    void LateUpdate()
-    {
-        // m_FireInputWasHeld = GetFireInputHeld();
     }
 
     public bool CanProcessInput()
