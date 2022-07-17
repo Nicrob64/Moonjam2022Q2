@@ -13,10 +13,41 @@ public class UIScript : MonoBehaviour
 
     public TextMeshProUGUI RoundTimer;
 
-    // Start is called before the first frame update
-    void Start()
+    public TextMeshProUGUI ShoppingList;
+    public TextMeshProUGUI RemainingQuota;
+
+    void UpdateShoppingList(Dictionary<PickableItemInfo, int> list)
     {
+        Debug.Log("UpdateShoppingList called");
+
+        string text = "";
+
+        foreach(var item in list)
+        {
+            // If the item has already been collected, mark it with a strikethrough
+            if(item.Value > 0)
+            {
+                text += String.Format("<s>{0}</s>\n", item.Key.ItemName);
+            }
+            else
+            {
+                text += item.Key.ItemName + "\n";
+            }
+        }
+
+        Debug.Log(text);
         
+        ShoppingList.text = text;
+    }
+
+    void UpdateRemainingQuota()
+    {
+        RemainingQuota.text = String.Format("Remaining quota: {0}", GameStateManager.Instance.OrdersRemainingForDailyQuota);
+    }
+    
+    void Awake()
+    {
+        EventManager.Instance.OnPackageCompleted += UpdateRemainingQuota;
     }
 
     // Update is called once per frame

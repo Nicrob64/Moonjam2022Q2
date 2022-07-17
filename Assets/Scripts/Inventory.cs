@@ -56,7 +56,12 @@ public class Inventory : MonoBehaviour
 
         ItemsHeld.Clear();
         EventManager.Instance.ShoppingListChanged(ItemsHeld);
-        
+
+        if(result)
+        {
+            GameStateManager.Instance.CompleteOrder();
+        }
+
         return result;
     }
 

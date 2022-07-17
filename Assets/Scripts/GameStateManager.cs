@@ -18,6 +18,12 @@ public class GameStateManager : MonoBehaviour
 
     public float RemainingTimeInRound { get; private set; }
 
+    public void CompleteOrder()
+    {
+        OrdersRemainingForDailyQuota--;
+        EventManager.Instance.PackageCompleted();
+    }
+
     void Awake()
     {
         if (_instance != null && _instance != this)
@@ -35,12 +41,6 @@ public class GameStateManager : MonoBehaviour
         RemainingTimeInRound = RoundTime;
     }
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
