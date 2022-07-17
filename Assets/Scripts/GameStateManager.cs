@@ -5,11 +5,35 @@ using UnityEngine;
 public class GameStateManager : MonoBehaviour
 {
 
-    public int OrdersRemainingForDailyQuota = 5;
+    private static GameStateManager _instance;
 
-    public const float TimePerRoundInSeconds = 300f; // 5 minutes
+    public static GameStateManager Instance
+    {
+        get { return _instance; }
+    }
 
-    public float RemainingTimeInRound = TimePerRoundInSeconds;
+    public int OrdersRemainingForDailyQuota { get; private set; }
+
+    public float RoundTime { get; private set; }
+
+    public float RemainingTimeInRound { get; private set; }
+
+    void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        else
+        {
+            _instance = this;
+        }
+
+        OrdersRemainingForDailyQuota = 5;
+        RoundTime = 300f; // 5 minutes
+        RemainingTimeInRound = RoundTime;
+    }
 
 
     // Start is called before the first frame update

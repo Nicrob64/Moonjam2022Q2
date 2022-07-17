@@ -85,7 +85,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerCamera: {fileID: 5985416117364206618}
   AudioSource: {fileID: 1251691436691451831}
-  PickupDistance: 1
+  PickupDistance: 2
   GravityDownForce: 20
   GroundCheckLayers:
     serializedVersion: 2
@@ -97,6 +97,10 @@ MonoBehaviour:
   MaxSpeedInAir: 10
   AccelerationSpeedInAir: 15
   SprintSpeedModifier: 1.2
+  MaxStamina: 100
+  StaminaDrainPerSecond: 20
+  StaminaRecoveredPerSecond: 10
+  StaminaCooldownMinimum: 50
   KillHeight: -50
   RotationSpeed: 200
   AimingRotationMultiplier: 0.4
