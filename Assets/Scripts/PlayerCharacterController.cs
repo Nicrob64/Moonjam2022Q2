@@ -255,18 +255,8 @@ public class PlayerCharacterController : MonoBehaviour
 
         if(Physics.Raycast(ray, out RaycastHit hitInfo, PickupDistance))
         {
-            var hitItem = hitInfo.collider.GetComponent<PickableItem>();
-
-            if(hitItem != null)
-            {
-                Debug.Log(String.Format("Picked up item {0}", hitItem.ItemInfo.ItemName));
-                // GetComponent<Inventory>().items.Add(hitItem.ItemInfo.ItemName);
-            }
-            else
-            {
-                var interactable = hitInfo.collider.GetComponent<Interactable>();
-                interactable?.Interact();
-            }
+            var interactable = hitInfo.collider.GetComponent<Interactable>();
+            interactable?.Interact();
         }
     }
 

@@ -23,6 +23,24 @@ public class Inventory : MonoBehaviour
         EventManager.Instance.ShoppingListChanged(ItemsHeld);
     }
 
+    public void PickupItem(PickableItemInfo item)
+    {
+        if(!ItemsHeld.ContainsKey(item))
+        {
+            // Can't pick up an item that isn't on the current list
+            return;
+        }
+
+        ItemsHeld[item] += 1;
+
+        EventManager.Instance.ShoppingListChanged(ItemsHeld);
+    }
+
+    void Awake()
+    {
+        EventManager.Instance.OnItemPicked += PickupItem;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

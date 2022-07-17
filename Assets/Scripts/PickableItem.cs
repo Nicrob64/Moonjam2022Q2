@@ -38,6 +38,11 @@ public class PickableItem : MonoBehaviour
 
     public Renderer LabelRenderer;
 
+    public void AddToInventory()
+    {
+        EventManager.Instance.ItemPicked(ItemInfo);
+    }
+
     // Start is called before the first frame update
     void Start()
     {

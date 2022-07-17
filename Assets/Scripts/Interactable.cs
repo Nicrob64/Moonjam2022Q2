@@ -4,13 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[System.Serializable]
-public class InteractionEvent : UnityEvent {}
 
 public class Interactable : MonoBehaviour
 {
 
-    public InteractionEvent OnInteracted;
+    public UnityEvent OnInteracted;
 
     public void Interact()
     {
