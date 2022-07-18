@@ -5,7 +5,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
 
-    public Dictionary<PickableItemInfo, int> ItemsHeld = new();
+    public Dictionary<PickableItemInfo, int> ItemsHeld = new Dictionary<PickableItemInfo, int>();
 
     public void RefreshShoppingList()
     {

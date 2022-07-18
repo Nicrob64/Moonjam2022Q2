@@ -13,7 +13,7 @@ public class Person
     public string Country;
     public string EmailAddress;
     public string TelephoneNumber;
-    public string ZipCode;
+    public int ZipCode;
     public string UPS;
 }
 

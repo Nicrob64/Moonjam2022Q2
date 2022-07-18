@@ -25,13 +25,13 @@ public class GameStateManager : MonoBehaviour
     private static readonly GameRound[] _rounds = new[]
     {
         new GameRound { RoundTime = 180, Quota = 3, ItemsPerOrder = 2, OrderSizeModifier = 0 },
-        new GameRound { RoundTime = 210, Quota = 4, ItemsPerOrder = 3, OrderSizeModifier = 1 },
-        new GameRound { RoundTime = 240, Quota = 5, ItemsPerOrder = 4, OrderSizeModifier = 2 },
-        new GameRound { RoundTime = 300, Quota = 7, ItemsPerOrder = 5, OrderSizeModifier = 2 },
-        new GameRound { RoundTime = 360, Quota = 10, ItemsPerOrder = 6, OrderSizeModifier = 2 }
+        //new GameRound { RoundTime = 210, Quota = 4, ItemsPerOrder = 3, OrderSizeModifier = 1 },
+       // new GameRound { RoundTime = 240, Quota = 5, ItemsPerOrder = 4, OrderSizeModifier = 2 },
+       // new GameRound { RoundTime = 300, Quota = 7, ItemsPerOrder = 5, OrderSizeModifier = 2 },
+       // new GameRound { RoundTime = 360, Quota = 10, ItemsPerOrder = 6, OrderSizeModifier = 2 }
     };
     private ushort _currentRoundIndex = 0;
-    private readonly System.Random _rand = new();
+    private readonly System.Random _rand = new System.Random();
     private static GameStateManager _instance;
 
     public static GameStateManager Instance
@@ -57,6 +57,9 @@ public class GameStateManager : MonoBehaviour
         if(_currentRoundIndex >= _rounds.Length - 1)
         {
             Debug.LogWarning("Reached final round; can't advance to a new round.");
+            SceneTransitionHelper.Instance.TransitionReason = TransitionReason.PromotionToQA;
+            SceneTransitionHelper.Instance.FromScene = FromScene.Warehouse;
+            SceneManager.LoadScene("Promotion");
             return;
         }
 
@@ -135,6 +138,7 @@ public class GameStateManager : MonoBehaviour
         {
             Debug.Log("You didn't meet your daily quota!");
             SceneTransitionHelper.Instance.TransitionReason = TransitionReason.GameOverFailedQuota;
+            SceneTransitionHelper.Instance.FromScene = FromScene.Warehouse;
 
             SceneManager.LoadScene("GameOver");
         }

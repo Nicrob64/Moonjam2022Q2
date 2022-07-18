@@ -13,6 +13,28 @@ public class Announcement : MonoBehaviour
     protected float musicLoopTime;
     protected AudioClip originalJam;
 
+    public float minWaitTime = 15.0f;
+    public float maxWaitTime = 30.0f;
+
+    public void StartAnnouncements()
+    {
+        StartCoroutine(MakeAnnouncementAfterDelay());
+    }
+
+    IEnumerator MakeAnnouncementAfterDelay()
+    {
+        float delay = Random.Range(minWaitTime, maxWaitTime);
+        yield return new WaitForSeconds(delay);
+        if (GameStateManager.Instance.CurrentState == GameState.Paused)
+        {
+            StartCoroutine(MakeAnnouncementAfterDelay());
+        }
+        else
+        {
+            MakeAnnouncement();
+        }
+    }
+
     public void MakeAnnouncement()
     {
         if (makingAnnouncement) { return; }
@@ -63,16 +85,17 @@ public class Announcement : MonoBehaviour
             a.time = musicLoopTime;
         }
         makingAnnouncement = false;
+        StartCoroutine(MakeAnnouncementAfterDelay());
     }
 
 
-    private void Update()
+   /* private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Keypad0) && !makingAnnouncement)
         {
             MakeAnnouncement();
         }
-    }
+    }*/
 
 
 }

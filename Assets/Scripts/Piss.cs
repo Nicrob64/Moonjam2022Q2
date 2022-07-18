@@ -12,6 +12,8 @@ public class Piss : MonoBehaviour
     public float PissGraceTimer = 5f;
     public float PissDuration = 10f;
 
+    public Cutscene pissCutscene;
+
     public float CurrentPiss { get; private set; }
     public float PissOverloadTimer { get; private set; }
 
@@ -26,6 +28,12 @@ public class Piss : MonoBehaviour
 
             PlayerController.MovementFrozen = _pissing;
         }
+    }
+
+    public void StartPissingNOW()
+    {
+        Pissing = true;
+        pissCutscene.Play();
     }
 
     public void Reset()
@@ -54,7 +62,11 @@ public class Piss : MonoBehaviour
             CurrentPiss -= (MaxPiss / PissDuration) * Time.deltaTime;
             if(CurrentPiss <= 0)
             {
-                Pissing = false;
+                if (!pissCutscene.shouldRun)
+                {
+                    Pissing = false;
+                    CurrentPiss = 0;
+                }
             }
 
             return;
@@ -73,7 +85,7 @@ public class Piss : MonoBehaviour
             // You pissed yourself!
             Debug.Log("You pissed yourself!");
             SceneTransitionHelper.Instance.TransitionReason = TransitionReason.GameOverPissedYourself;
-
+            SceneTransitionHelper.Instance.FromScene = FromScene.Warehouse;
             SceneManager.LoadScene("GameOver");
         }
     }

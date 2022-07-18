@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: 1dc4aaa7081e84245aa5fdebdb7462a6
+  - enabled: 1
+    path: Assets/Scenes/Promotion.unity
+    guid: 7c17a6bdd51332c4582b0c3dd5cf5994
   - enabled: 0
     path: Assets/Scenes/QTEScene.unity
     guid: 63d2a10a7144b4d4c94b606ad1d5e2fe

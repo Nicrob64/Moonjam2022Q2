@@ -13,6 +13,7 @@ public class CutsceneEvent
 
 public class Cutscene : MonoBehaviour
 {
+    public bool shouldRun = true;
     float currentTime = 0;
     //public List<KeyValuePair<float, UnityEvent>> events;
     public List<CutsceneEvent> events;
@@ -24,16 +25,47 @@ public class Cutscene : MonoBehaviour
 
     private void Update()
     {
-        currentTime += Time.deltaTime;
-        foreach(CutsceneEvent e in events)
+        if (shouldRun)
         {
-            if(currentTime > e.time && !e.done)
+            currentTime += Time.deltaTime;
+            bool isEverythingdone = true;
+            foreach (CutsceneEvent e in events)
             {
-                e.ev.Invoke();
-                e.done = true;
+                isEverythingdone = isEverythingdone && e.done;
+                if (currentTime > e.time && !e.done)
+                {
+                    e.ev.Invoke();
+                    e.done = true;
+                }
+            }
+            if (isEverythingdone)
+            {
+                Stop();
             }
         }
        
     }
 
+
+    public void Reset()
+    {
+        foreach(CutsceneEvent e in events)
+        {
+            e.done = false;
+        }
+        currentTime = 0;   
+    }
+
+    public void Play() 
+    {
+        currentTime = 0;
+        shouldRun = true;
+    }
+
+    public void Stop()
+    {
+        currentTime = 0;
+        shouldRun = false;
+        Reset();
+    }
 }

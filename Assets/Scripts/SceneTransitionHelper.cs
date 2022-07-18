@@ -6,7 +6,21 @@ public enum TransitionReason
 {
     Undefined,
     GameOverFailedQuota,
-    GameOverPissedYourself
+    GameOverPissedYourself,
+    GameOverFuckedUpTooManyOrders,
+    PromotionToQA,
+    PromotionToManager,
+    EndingCorpo,
+    EndingUnion,
+    Retry
+}
+
+public enum FromScene
+{
+    Undefined,
+    Warehouse,
+    QA,
+    Management
 }
 
 // Helper class for passing info between scenes
@@ -20,6 +34,7 @@ public class SceneTransitionHelper : MonoBehaviour
     }
 
     public TransitionReason TransitionReason = TransitionReason.Undefined;
+    public FromScene FromScene = FromScene.Undefined;
 
     void Awake()
     {

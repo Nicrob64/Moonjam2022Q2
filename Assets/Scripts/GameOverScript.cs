@@ -1,10 +1,11 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameOverScript : MonoBehaviour
 {
-    public TextMeshProUGUI ReasonMessageText;
+    public Text ReasonMessageText;
 
     void Start()
     {
@@ -17,10 +18,13 @@ public class GameOverScript : MonoBehaviour
         switch(SceneTransitionHelper.Instance.TransitionReason)
         {
             case TransitionReason.GameOverFailedQuota:
-                ReasonMessageText.text = "You failed to meet your quota!";
+                ReasonMessageText.text = "(You failed to meet your quota)";
                 break;
             case TransitionReason.GameOverPissedYourself:
-                ReasonMessageText.text = "You pissed yourself as an adult! Gross!";
+                ReasonMessageText.text = "(You pissed yourself as an adult! Gross)";
+                break;
+            case TransitionReason.GameOverFuckedUpTooManyOrders:
+                ReasonMessageText.text = "(You messed up too many shipping orders. How will the company survive?)";
                 break;
             default:
                 break;
@@ -29,6 +33,19 @@ public class GameOverScript : MonoBehaviour
 
     public void TryAgain()
     {
-        SceneManager.LoadScene("Warehouse");
+        SceneTransitionHelper.Instance.TransitionReason = TransitionReason.Retry;
+        switch (SceneTransitionHelper.Instance.FromScene)
+        {
+            case FromScene.Warehouse:
+                SceneManager.LoadScene("Warehouse");
+                break;
+            case FromScene.QA:
+                SceneManager.LoadScene("QAScene");
+                break;
+            case FromScene.Management:
+                break;
+        }
+        
+        
     }
 }

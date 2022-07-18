@@ -11,7 +11,7 @@ public class BoxLabel : MonoBehaviour
         title.text = (p.Title + " " + p.GivenName + " " + p.Surname);
         address1.text = (p.StreetAddress);
         address2.text = (p.City + ", " + p.State + ", " + p.Country);
-        address3.text = (p.ZipCode);
+        address3.text = p.ZipCode.ToString();
         tracking.text = ("Tracking: " + p.UPS);
         qaPassed.text = "[QA:CHECKED:"+p.UPS.Substring(0, 6).Replace(" ", "")+"]";
     }
