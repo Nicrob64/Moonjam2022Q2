@@ -644,8 +644,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stations:
   - {fileID: 8300000, guid: c8277b03a6ddc2f4db3c0b27bb26d74f, type: 3}
-  - {fileID: 8300000, guid: d9c61991087309c45bce5652c4f96152, type: 3}
   - {fileID: 8300000, guid: 91f96e66b48d13f4cb13b2cbbf500e52, type: 3}
+  - {fileID: 8300000, guid: c92b4809163ffc84bbf01109eb1b1656, type: 3}
+  - {fileID: 8300000, guid: 4d963a366f8afd24d99ba63790f91a41, type: 3}
+  - {fileID: 8300000, guid: 28bc379b54e14a84393be38835cfa075, type: 3}
+  - {fileID: 8300000, guid: 1abee78ce192e8f48a39708ddf93ff51, type: 3}
+  - {fileID: 8300000, guid: 3090e3c729e52cc439b4860d43aa668d, type: 3}
+  - {fileID: 8300000, guid: 534d68a3e40a30f47966d6091bedbbe5, type: 3}
   main: {fileID: 4185309233549145060}
   tune: {fileID: 8364481726537231846}
 --- !u!82 &4185309233549145060

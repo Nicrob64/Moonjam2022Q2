@@ -31,7 +31,7 @@ public class PromotionScript : MonoBehaviour
                 SceneManager.LoadScene("QAScene");
                 break;
             case TransitionReason.PromotionToManager:
-                
+                SceneManager.LoadScene("ManagerOffice");
                 break;
         }
     }

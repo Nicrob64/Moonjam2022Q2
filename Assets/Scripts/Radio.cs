@@ -13,12 +13,14 @@ public class Radio : MonoBehaviour
 
     public void ChannelUp()
     {
+        if (isSwitching) return;
         currentStation = (currentStation + 1) % stations.Count;
         StartCoroutine(SwitchStation());
     }
 
     public void ChannelDown()
     {
+        if (isSwitching) return;
         currentStation--;
         if(currentStation < 0)
         {

@@ -158,7 +158,8 @@ public class QAController : MonoBehaviour
         else
         {
             quotaRemaining--;
-            if(quotaRemaining <= 0)
+            remainingMesh.text = quotaRemaining.ToString();
+            if (quotaRemaining <= 0)
             {
                 SceneTransitionHelper.Instance.FromScene = FromScene.QA;
                 SceneTransitionHelper.Instance.TransitionReason = TransitionReason.PromotionToManager;

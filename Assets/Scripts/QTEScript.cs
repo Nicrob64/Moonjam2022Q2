@@ -4,6 +4,7 @@ using System.Collections.Generic;
 // using System.Linq;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public enum QTEStatus
 {
@@ -92,9 +93,26 @@ public class QTEScript : MonoBehaviour
         {KeyCode.W, 'W'},
         {KeyCode.X, 'X'},
         {KeyCode.Y, 'Y'},
-        {KeyCode.Z, 'Z'}
+        {KeyCode.Z, 'Z'},
+
+        {KeyCode.Ampersand, '&'},
+        {KeyCode.Hash, '#'},
+        {KeyCode.Percent, '%'},
+        {KeyCode.RightParen, ')'},
+        {KeyCode.At, '@'},
+        {KeyCode.LeftCurlyBracket, '{'}
     };
 
+    Dictionary<KeyCode, KeyCode> substitutions = new Dictionary<KeyCode, KeyCode>()
+    {
+        {KeyCode.Ampersand, KeyCode.Alpha7 },
+        {KeyCode.Hash, KeyCode.Alpha3 },
+        {KeyCode.Percent, KeyCode.Alpha5 },
+        {KeyCode.RightParen, KeyCode.Alpha0 },
+        {KeyCode.At, KeyCode.Alpha2 },
+        {KeyCode.LeftCurlyBracket, KeyCode.LeftBracket },
+    };
+    
     public TextMeshProUGUI TextMesh;
     public AudioSource AudioSource;
     public AudioClip GoodInputSound;
@@ -130,7 +148,7 @@ public class QTEScript : MonoBehaviour
         }
 
         _buttonPrompts.Add(new QTEButton()
-        { 
+        {
             keyCode = keyCode,
             delay = delay,
             status = QTEStatus.Unhandled
@@ -147,6 +165,7 @@ public class QTEScript : MonoBehaviour
         QTEButton button = _buttonPrompts[0];
         char c = KeyCodeMap[button.keyCode];
 
+        TextMesh.rectTransform.anchoredPosition = new Vector3(UnityEngine.Random.Range(0.0f, 800.0f) - 400, UnityEngine.Random.Range(0.0f, 500.0f) - 250, 0);
         TextMesh.text = new string(c, 1);
     }
 
@@ -204,6 +223,9 @@ public class QTEScript : MonoBehaviour
         if(_failureCount >= FailureLimit)
         {
             Debug.Log("QTE failed!");
+            SceneTransitionHelper.Instance.TransitionReason = TransitionReason.GameOverFailedTheQTE;
+            SceneTransitionHelper.Instance.FromScene = FromScene.Management;
+            SceneManager.LoadScene("GameOver");
             Deactivate();
         }
     }
@@ -219,7 +241,15 @@ public class QTEScript : MonoBehaviour
 
         // Debug.Log(String.Format("Is key code {0} held down? {1}", button.keyCode, Input.GetKey(button.keyCode)));
 
-        if(Input.GetKey(button.keyCode) && _elapsedTime >= button.delay)
+        bool modifierDown = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+        bool needsMod = substitutions.ContainsKey(button.keyCode);
+        KeyCode toPress = button.keyCode;
+        if (needsMod)
+        {
+            toPress = substitutions[toPress];
+        }
+
+        if(Input.GetKey(toPress) && _elapsedTime >= button.delay && (needsMod == modifierDown))
         {
             AudioSource?.PlayOneShot(GoodInputSound);
             button.status = QTEStatus.Succeeded;
@@ -284,7 +314,21 @@ public class QTEScript : MonoBehaviour
 
         if(Input.anyKeyDown)
         {
-            HandleInput();
+            if (Input.GetKeyDown(KeyCode.LeftShift)
+                || Input.GetKeyDown(KeyCode.RightShift)
+                || Input.GetKeyDown(KeyCode.Mouse0)
+                || Input.GetKeyDown(KeyCode.Mouse1)
+                || Input.GetKeyDown(KeyCode.Mouse2)
+                || Input.GetKeyDown(KeyCode.Mouse3)
+                || Input.GetKeyDown(KeyCode.Mouse4)
+                || Input.GetKeyDown(KeyCode.Mouse5))
+            {
+                //modifier or mouse
+            }
+            else
+            {
+                HandleInput();
+            }
         }
 
         QTEButton button = _buttonPrompts[0];

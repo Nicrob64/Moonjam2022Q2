@@ -8,6 +8,7 @@ public enum TransitionReason
     GameOverFailedQuota,
     GameOverPissedYourself,
     GameOverFuckedUpTooManyOrders,
+    GameOverFailedTheQTE,
     PromotionToQA,
     PromotionToManager,
     EndingCorpo,

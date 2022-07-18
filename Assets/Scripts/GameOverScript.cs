@@ -26,6 +26,9 @@ public class GameOverScript : MonoBehaviour
             case TransitionReason.GameOverFuckedUpTooManyOrders:
                 ReasonMessageText.text = "(You messed up too many shipping orders. How will the company survive?)";
                 break;
+            case TransitionReason.GameOverFailedTheQTE:
+                ReasonMessageText.text = "(Fucked up the QTE lole)";
+                break;
             default:
                 break;
         }
@@ -43,6 +46,7 @@ public class GameOverScript : MonoBehaviour
                 SceneManager.LoadScene("QAScene");
                 break;
             case FromScene.Management:
+                SceneManager.LoadScene("ManagerOffice");
                 break;
         }
         
