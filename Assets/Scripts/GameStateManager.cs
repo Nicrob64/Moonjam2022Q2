@@ -26,9 +26,9 @@ public class GameStateManager : MonoBehaviour
     {
         new GameRound { RoundTime = 180, Quota = 3, ItemsPerOrder = 2, OrderSizeModifier = 0 },
         new GameRound { RoundTime = 210, Quota = 4, ItemsPerOrder = 3, OrderSizeModifier = 1 },
-        new GameRound { RoundTime = 240, Quota = 5, ItemsPerOrder = 4, OrderSizeModifier = 2 },
-        new GameRound { RoundTime = 300, Quota = 7, ItemsPerOrder = 5, OrderSizeModifier = 2 },
-        new GameRound { RoundTime = 360, Quota = 10, ItemsPerOrder = 6, OrderSizeModifier = 2 }
+        new GameRound { RoundTime = 270, Quota = 5, ItemsPerOrder = 5, OrderSizeModifier = 2 }
+        // new GameRound { RoundTime = 300, Quota = 7, ItemsPerOrder = 5, OrderSizeModifier = 2 },
+        // new GameRound { RoundTime = 360, Quota = 10, ItemsPerOrder = 6, OrderSizeModifier = 2 }
     };
     private ushort _currentRoundIndex = 0;
     private readonly System.Random _rand = new System.Random();
