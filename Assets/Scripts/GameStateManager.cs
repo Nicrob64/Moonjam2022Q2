@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 
 public enum GameState
 {
-    Playable,
-    TransitionBetweenRounds
+    Playing,
+    Paused
 }
 
 public struct GameRound
@@ -50,15 +50,29 @@ public class GameStateManager : MonoBehaviour
 
     public float RemainingTimeInRound { get; private set; }
 
+    public float RoundTransitionDuration = 5.0f;
+
     private void NextRound()
     {
-        if(_currentRoundIndex < _rounds.Length - 1)
+        if(_currentRoundIndex >= _rounds.Length - 1)
         {
-            _currentRoundIndex++;
+            Debug.LogWarning("Reached final round; can't advance to a new round.");
+            return;
         }
 
+        CurrentState = GameState.Paused;
+
+        _currentRoundIndex++;
         OrdersRemainingForDailyQuota = CurrentRound.Quota;
         RemainingTimeInRound = CurrentRound.RoundTime;
+
+        EventManager.Instance.RoundComplete();
+    }
+
+    public void OnRoundTransitionComplete()
+    {
+        Debug.Log("GameStateManager.OnRoundTransitionComplete");
+        CurrentState = GameState.Playing;
     }
 
     public void CompleteOrder()
@@ -99,15 +113,22 @@ public class GameStateManager : MonoBehaviour
             _instance = this;
         }
 
-        CurrentState = GameState.Playable;
+        CurrentState = GameState.Playing;
         OrdersRemainingForDailyQuota = CurrentRound.Quota;
         RemainingTimeInRound = CurrentRound.RoundTime;
+
+        EventManager.Instance.OnRoundTransitionComplete += OnRoundTransitionComplete;
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        if(CurrentState != GameState.Playing)
+        {
+            return;
+        }
+
         RemainingTimeInRound -= Time.deltaTime;
 
         if(RemainingTimeInRound <= 0 && OrdersRemainingForDailyQuota > 0)

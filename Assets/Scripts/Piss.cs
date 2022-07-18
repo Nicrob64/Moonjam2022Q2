@@ -28,15 +28,27 @@ public class Piss : MonoBehaviour
         }
     }
 
-    void Awake()
+    public void Reset()
     {
         CurrentPiss = 0;
         PissOverloadTimer = 0;
     }
 
+    void Awake()
+    {
+        Reset();
+
+        EventManager.Instance.OnRoundComplete += Reset;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if(GameStateManager.Instance.CurrentState == GameState.Paused)
+        {
+            return;
+        }
+
         if(_pissing)
         {
             CurrentPiss -= (MaxPiss / PissDuration) * Time.deltaTime;

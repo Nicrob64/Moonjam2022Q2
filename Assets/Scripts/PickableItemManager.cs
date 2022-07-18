@@ -52,7 +52,7 @@ public class PickableItemManager : MonoBehaviour
             }
 
             PickableItemInfo info = ItemList.Items[i % ItemList.Items.Count];
-            Debug.Log(string.Format("Set {0} item value to {1} {2}", item, info.ItemName, info.TexturePath));
+            // Debug.Log(string.Format("Set {0} item value to {1} {2}", item, info.ItemName, info.TexturePath));
             item.ItemInfo = info;
         }
     }
