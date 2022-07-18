@@ -204,6 +204,11 @@ public class PlayerCharacterController : MonoBehaviour
 
         HandleCharacterMovement();
         HandleInteraction();
+        
+    }
+
+    private void FixedUpdate()
+    {
         HandleClipboardZoom();
     }
 
@@ -279,10 +284,10 @@ public class PlayerCharacterController : MonoBehaviour
             target = ClipboardRaisedPosition;
         }
 
-        Vector3 newPos = Vector3.MoveTowards(ClipboardTransform.position, target.position, ClipboardMoveMaxDelta);
+        Vector3 newPos = Vector3.MoveTowards(ClipboardTransform.position, target.position, ClipboardMoveMaxDelta * Time.fixedDeltaTime);
         ClipboardTransform.position = newPos;
 
-        Vector3 newEuler = Vector3.MoveTowards(ClipboardTransform.eulerAngles, target.eulerAngles, ClipboardMoveAngleDelta);
+        Vector3 newEuler = Vector3.MoveTowards(ClipboardTransform.eulerAngles, target.eulerAngles, ClipboardMoveAngleDelta * Time.fixedDeltaTime);
         ClipboardTransform.eulerAngles = newEuler;
 
     }
