@@ -1,20 +1,20 @@
 {
     "Items" : [
         {
-            "ItemName" : "Smug",
-            "TexturePath" : "Textures/smug"
+            "ItemName" : "Greg Action Figure",
+            "TexturePath" : "Textures/gregfigure"
         },
         {
-            "ItemName" : "Smerg",
-            "TexturePath" : "Textures/smerg"
+            "ItemName" : "Haunted Doll",
+            "TexturePath" : "Textures/haunteddoll"
         },
         {
-            "ItemName" : "Suffer",
-            "TexturePath" : "Textures/suffer"
+            "ItemName" : "Pink Fish Cat Toy",
+            "TexturePath" : "Textures/fish"
         },
         {
-            "ItemName" : "moon2T",
-            "TexturePath" : "Textures/moon2T"
+            "ItemName" : "Definitely Not Radioactive Waste",
+            "TexturePath" : "Textures/mysteryliquid"
         },
         {
             "ItemName" : "Lube, 55 Gallon Drum",
