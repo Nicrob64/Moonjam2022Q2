@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+// using System.Linq;
 using UnityEngine;
 using TMPro;
 
@@ -25,9 +26,15 @@ public struct QTEButton
 
 public class QTEScript : MonoBehaviour
 {
+    // static readonly KeyCode[] _allKeyCodes =
+    //     System.Enum.GetValues(typeof(KeyCode))
+    //     .Cast<KeyCode>()
+    //     .Where(k => ((int)k < (int)KeyCode.Mouse0))
+    //     .ToArray();
 
     // Mapping from Unity KeyCodes to the corresponding symbols in the 212 Keyboard font
-    // BUG: Characters that require a key combo like ? (shift + /) are not accepted by the input logic
+    // Characters that require a key combination, like ~ (i.e. Shift + `) are not supported because
+    // Input.GetKeyDown always returns false for those key codes, and I can't be bothered to figure it out
     public static Dictionary<KeyCode, char> KeyCodeMap = new Dictionary<KeyCode, char>()
     {
         {KeyCode.Backspace, 'h'},
@@ -38,8 +45,8 @@ public class QTEScript : MonoBehaviour
         {KeyCode.Space, 'w'},
         {KeyCode.UpArrow, 'q'},
         {KeyCode.DownArrow, 'r'},
-        {KeyCode.RightArrow, 's'},
-        {KeyCode.LeftArrow, 't'},
+        {KeyCode.RightArrow, 't'},
+        {KeyCode.LeftArrow, 's'},
         {KeyCode.Alpha0, '0'},
         {KeyCode.Alpha1, '1'},
         {KeyCode.Alpha2, '2'},
@@ -50,33 +57,15 @@ public class QTEScript : MonoBehaviour
         {KeyCode.Alpha7, '7'},
         {KeyCode.Alpha8, '8'},
         {KeyCode.Alpha9, '9'},
-        {KeyCode.Exclaim, '!'},
-        {KeyCode.DoubleQuote, '"'},
-        {KeyCode.Hash, '#'},
-        {KeyCode.Dollar, '$'},
-        {KeyCode.Percent, '%'},
-        {KeyCode.Ampersand, '&'},
-        {KeyCode.Quote, '\''},
-        {KeyCode.LeftParen, '('},
-        {KeyCode.RightParen, ')'},
-        {KeyCode.Asterisk, '*'},
-        {KeyCode.Plus, '+'},
         {KeyCode.Comma, ','},
         {KeyCode.Minus, '-'},
         {KeyCode.Period, '.'},
         {KeyCode.Slash, '/'},
-        {KeyCode.Colon, ':'},
         {KeyCode.Semicolon, ';'},
-        {KeyCode.Less, '<'},
         {KeyCode.Equals, '='},
-        {KeyCode.Greater, '>'},
-        {KeyCode.Question, '?'},
-        {KeyCode.At, '@'},
         {KeyCode.LeftBracket, '['},
         {KeyCode.Backslash, '\\'},
         {KeyCode.RightBracket, ']'},
-        {KeyCode.Caret, '^'},
-        {KeyCode.Underscore, '_'},
         {KeyCode.BackQuote, '`'},
         {KeyCode.A, 'A'},
         {KeyCode.B, 'B'},
@@ -106,19 +95,32 @@ public class QTEScript : MonoBehaviour
         {KeyCode.Z, 'Z'}
     };
 
-    public TextMeshProUGUI textMesh;
+    public TextMeshProUGUI TextMesh;
+    public AudioSource AudioSource;
+    public AudioClip GoodInputSound;
+    public AudioClip BadInputSound;
+    public Color ReadyColor = Color.cyan;
+    public Color CorrectColor = Color.green;
+    public Color IncorrectColor = Color.red;
+    
 
     // Grace period during which the player can successfully press the button after the initial delay
-    public float gracePeriod = 1.0f;
+    public float GracePeriod = 1.0f;
+    // Time it takes for a button to fade out after it's handled or the time limit is exceeded
+    public float FadeOut = 0.25f;
+    // Number of failures before failing the QTE
+    public ushort FailureLimit { get; private set; }
+    // How many times the player has failed the current QTE
+    ushort _failureCount = 0;
 
     // true if the QTE is currently running
-    bool active = false;
+    bool _active = false;
 
     // Elapsed time for the current character
-    float elapsedTime = 0.0f;
+    float _elapsedTime = 0.0f;
 
     // List of button prompts for the QTE sequence
-    List<QTEButton> buttonPrompts = new List<QTEButton>();
+    readonly List<QTEButton> _buttonPrompts = new();
 
     public void AddButtonPrompt(KeyCode keyCode, float delay)
     {
@@ -127,7 +129,7 @@ public class QTEScript : MonoBehaviour
             throw new ArgumentException("Invalid key code");
         }
 
-        buttonPrompts.Add(new QTEButton()
+        _buttonPrompts.Add(new QTEButton()
         { 
             keyCode = keyCode,
             delay = delay,
@@ -137,67 +139,105 @@ public class QTEScript : MonoBehaviour
 
     public void Reset()
     {
-        buttonPrompts.Clear();
+        _buttonPrompts.Clear();
     }
 
     void UpdateText()
     {
-        QTEButton button = buttonPrompts[0];
+        QTEButton button = _buttonPrompts[0];
         char c = KeyCodeMap[button.keyCode];
 
-        textMesh.text = new string(c, 1);
+        TextMesh.text = new string(c, 1);
     }
 
     // Start displaying the QTE
-    public void Activate()
+    public void Activate(ushort failureLimit)
     {
-        active = true;
-        textMesh.renderMode = TextRenderFlags.Render;
-        textMesh.alpha = 1.0f;
+        FailureLimit = failureLimit;
 
-        UpdateText();        
+        _failureCount = 0;
+        _elapsedTime = 0;
+
+        _active = true;
+        TextMesh.gameObject.SetActive(_active);
+
+        UpdateText();
     }
 
     // End the QTE. Happens automatically when all of the button prompts play out.
 
     public void Deactivate()
     {
-        textMesh.alpha = 1.0f;
-        textMesh.renderMode = TextRenderFlags.DontRender;
-        active = false;
+        _active = false;
+        TextMesh.gameObject.SetActive(_active);
+    }
+
+    /*
+    public static IEnumerable<KeyCode> GetCurrentKeys()
+    {
+        if (Input.anyKey)
+            for (int i = 0; i < _allKeyCodes.Length; i++)
+                if (Input.GetKey(_allKeyCodes[i]))
+                    yield return _allKeyCodes[i];
+    }
+
+    void DebugInput()
+    {
+        string keys = "";
+        foreach(var keyCode in GetCurrentKeys())
+        {
+            keys += keyCode.ToString() + "";
+        }
+
+        Debug.Log(keys);
+    }
+    */
+
+    // Call when the player fails an input (either by hitting it too early, hitting the wrong key, or missing it entirely)
+    void ButtonFailed(ref QTEButton button)
+    {
+        button.status = QTEStatus.Failed;
+        _failureCount++;
+
+        AudioSource?.PlayOneShot(BadInputSound);
+
+        if(_failureCount >= FailureLimit)
+        {
+            Debug.Log("QTE failed!");
+            Deactivate();
+        }
     }
 
     void HandleInput()
     {
-        QTEButton button = buttonPrompts[0];
+        QTEButton button = _buttonPrompts[0];
 
         if(button.status != QTEStatus.Unhandled)
         {
             return;
         }
 
-        if(elapsedTime < button.delay)
+        // Debug.Log(String.Format("Is key code {0} held down? {1}", button.keyCode, Input.GetKey(button.keyCode)));
+
+        if(Input.GetKey(button.keyCode) && _elapsedTime >= button.delay)
         {
-            button.status = QTEStatus.Failed;
-        }
-        else if(Input.GetKeyDown(button.keyCode))
-        {
+            AudioSource?.PlayOneShot(GoodInputSound);
             button.status = QTEStatus.Succeeded;
         }
         else
         {
-            button.status = QTEStatus.Failed;
+            ButtonFailed(ref button);
         }
 
-        buttonPrompts[0] = button;
+        _buttonPrompts[0] = button;
     }
 
     void NextButton()
     {
-        buttonPrompts.RemoveAt(0);
-        elapsedTime = 0;
+        _buttonPrompts.RemoveAt(0);
+        _elapsedTime = 0;
 
-        if(buttonPrompts.Count == 0)
+        if(_buttonPrompts.Count == 0)
         {
             return;
         }
@@ -206,6 +246,7 @@ public class QTEScript : MonoBehaviour
     }
 
     // Start is called before the first frame update
+    /*
     void Start()
     {        
         AddButtonPrompt(KeyCode.H, 1.0f);
@@ -213,20 +254,29 @@ public class QTEScript : MonoBehaviour
         AddButtonPrompt(KeyCode.L, 1.0f);
         AddButtonPrompt(KeyCode.L, 1.25f);
         AddButtonPrompt(KeyCode.O, 0.75f);
-        AddButtonPrompt(KeyCode.Question, 0.5f);
+        AddButtonPrompt(KeyCode.LeftArrow, 0.5f);
+        AddButtonPrompt(KeyCode.RightArrow, 0.5f);
 
-        Activate();
+        Activate(3);
+    }
+    */
+
+    void Awake()
+    {
+        Deactivate();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!active)
+        // DebugInput();
+
+        if(!_active)
         {
             return;
         }
 
-        if(buttonPrompts.Count == 0)
+        if(_buttonPrompts.Count == 0)
         {
             Deactivate();
             return;
@@ -237,39 +287,52 @@ public class QTEScript : MonoBehaviour
             HandleInput();
         }
 
-        QTEButton button = buttonPrompts[0];
+        QTEButton button = _buttonPrompts[0];
 
-        elapsedTime += Time.deltaTime;
+        _elapsedTime += Time.deltaTime;
 
-        float scale = elapsedTime / button.delay;
+        float scale = _elapsedTime / button.delay;
         if(scale > 1.0f) scale = 1.0f;
 
-        textMesh.transform.localScale = new Vector3(scale, scale, 1.0f);
+        TextMesh.transform.localScale = new Vector3(scale, scale, 1.0f);
 
-        if(elapsedTime > button.delay)
+        if(_elapsedTime > button.delay)
         {
-            textMesh.color = Color.blue;
-            textMesh.alpha = 1.0f - ((elapsedTime - button.delay) / gracePeriod);
+            TextMesh.color = ReadyColor;
         }
         else
         {
-            textMesh.color = Color.white;
-            textMesh.alpha = 1.0f;
+            TextMesh.color = Color.white;
+            TextMesh.alpha = 1.0f;
         }
 
         if(button.status == QTEStatus.Succeeded)
         {
-            textMesh.color = new Color(0.0f, 1.0f, 0.0f, textMesh.alpha);
+            TextMesh.color = CorrectColor;
         }
         else if(button.status == QTEStatus.Failed)
         {
-            textMesh.color = new Color(1.0f, 0.0f, 0.0f, textMesh.alpha);
+            TextMesh.color = IncorrectColor;
         }
 
-        if(elapsedTime > button.delay + gracePeriod)
+        if(_elapsedTime > button.delay + GracePeriod)
         {
-            Debug.Log(String.Format("Elapsed time {0} delay {1} grace period {2}", elapsedTime, button.delay, gracePeriod));
-            NextButton();
+            if(button.status == QTEStatus.Unhandled)
+            {
+                // GIGA HACK
+                // As far as I can tell there's no way to get a reference to a member of a list in C#
+                // So I have to reassign the 0th list element to make sure we get the updated values next frame
+                ButtonFailed(ref button);
+                _buttonPrompts[0] = button;
+            }
+
+            float deltaTime = _elapsedTime - (button.delay + GracePeriod);
+            TextMesh.alpha = 1.0f - (deltaTime / FadeOut);
+
+            if(deltaTime >= GracePeriod)
+            {
+                NextButton();
+            }
         }
     }
 }
