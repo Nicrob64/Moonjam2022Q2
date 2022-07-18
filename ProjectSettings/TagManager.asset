@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PickableItem
   - BoxSpawn
+  - PissBottleSpawn
   layers:
   - Default
   - TransparentFX

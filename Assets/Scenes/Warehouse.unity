@@ -959,17 +959,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9d5e9a4b5619074f974f1a53a2eba23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &298274316 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5985416117277580041, guid: 14ab64cc16702194ba2955c650986950, type: 3}
-  m_PrefabInstance: {fileID: 1554848825}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 298274311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 156884958da249648be3f8530cfffd0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &308626222
 GameObject:
   m_ObjectHideFlags: 0
@@ -1301,7 +1290,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &345701514
 GameObject:
@@ -1385,7 +1374,7 @@ Transform:
   m_Children:
   - {fileID: 1962562769}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 180, y: -63.576996, z: 0}
 --- !u!1001 &354464431
 PrefabInstance:
@@ -2379,7 +2368,7 @@ Transform:
   m_Children:
   - {fileID: 1989666632}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &551656118
 GameObject:
@@ -2423,7 +2412,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &569368314
 GameObject:
@@ -2462,7 +2451,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 298274313}
         m_TargetAssemblyTypeName: Piss, Assembly-CSharp
-        m_MethodName: StartPissingNOW
+        m_MethodName: PissInBathroom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2724,7 +2713,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5533788529468546260, guid: 2bd1902191452a24ca534cfe6ba3e26e, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5533788529468546260, guid: 2bd1902191452a24ca534cfe6ba3e26e, type: 3}
       propertyPath: m_LocalScale.x
@@ -3012,7 +3001,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1524074038615205226, guid: 5e904d32c04ee2d42a0eed09244c0212, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1524074038615205226, guid: 5e904d32c04ee2d42a0eed09244c0212, type: 3}
       propertyPath: m_LocalScale.x
@@ -3266,7 +3255,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1524074038615205226, guid: 5e904d32c04ee2d42a0eed09244c0212, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1524074038615205226, guid: 5e904d32c04ee2d42a0eed09244c0212, type: 3}
       propertyPath: m_LocalScale.x
@@ -3465,7 +3454,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &787449832
 MonoBehaviour:
@@ -3779,7 +3768,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5533788529468546260, guid: 2bd1902191452a24ca534cfe6ba3e26e, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5533788529468546260, guid: 2bd1902191452a24ca534cfe6ba3e26e, type: 3}
       propertyPath: m_LocalScale.x
@@ -3946,7 +3935,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5533788529468546260, guid: 2bd1902191452a24ca534cfe6ba3e26e, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5533788529468546260, guid: 2bd1902191452a24ca534cfe6ba3e26e, type: 3}
       propertyPath: m_LocalScale.x
@@ -4380,7 +4369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d5ea669cadd47ee439d6118bf049126e, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d5ea669cadd47ee439d6118bf049126e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5152,6 +5141,56 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1702002603968346153, guid: 622a1d59b3c6f024ca0816227b5687a6, type: 3}
   m_PrefabInstance: {fileID: 1644976808}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1196135535
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1196135536}
+  - component: {fileID: 1196135538}
+  m_Layer: 0
+  m_Name: PissBottleSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1196135536
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196135535}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.34, y: -2.924, z: -5.149}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 543450652985263956}
+  - {fileID: 543450651960561394}
+  - {fileID: 543450652147821413}
+  - {fileID: 543450653481051204}
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1196135538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196135535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ab676fb9f465ad4584da94a46dab20b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PissBottlePrefab: {fileID: 5270536329008908163, guid: 6f846faf6439169459564bd749161dc3, type: 3}
+  SpawnDelay: 10
 --- !u!1 &1205449985
 GameObject:
   m_ObjectHideFlags: 0
@@ -5818,7 +5857,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1415334942
 MonoBehaviour:
@@ -5977,7 +6016,7 @@ Transform:
   - {fileID: 8147359315438696981}
   - {fileID: 569368319}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1471688711
 GameObject:
@@ -6596,44 +6635,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
-      propertyPath: Zip
-      value: 
-      objectReference: {fileID: 8300000, guid: 1bff3d95c109a05438f62e0643f6cfda, type: 3}
-    - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
-      propertyPath: Flush
-      value: 
-      objectReference: {fileID: 8300000, guid: 79c01d9428a004b4192fa897792371a3, type: 3}
-    - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
-      propertyPath: Unzip
-      value: 
-      objectReference: {fileID: 8300000, guid: 2f3990a91e4dd97409cc4757a466d8bf, type: 3}
-    - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
       propertyPath: pissCutscene
       value: 
       objectReference: {fileID: 537476106}
     - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
-      propertyPath: ToiletPissEnd
-      value: 
-      objectReference: {fileID: 8300000, guid: f2e431fcebc74f348894b87d1aeebacd, type: 3}
-    - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
-      propertyPath: PissAudioSource
-      value: 
-      objectReference: {fileID: 1554848826}
-    - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
-      propertyPath: ToiletPissStart
-      value: 
-      objectReference: {fileID: 8300000, guid: d71f0e109d32c9441abfe72ef605ae11, type: 3}
-    - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
-      propertyPath: PlayerController
-      value: 
-      objectReference: {fileID: 298274316}
-    - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
-      propertyPath: ToiletPissMiddle
-      value: 
-      objectReference: {fileID: 8300000, guid: d5022784f3d4e2f4fbc3b05eb456e5d9, type: 3}
-    - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
       propertyPath: PissGainPerSecond
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2528483006977297365, guid: 14ab64cc16702194ba2955c650986950, type: 3}
       propertyPath: m_Depth
@@ -6698,11 +6705,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 6361941578125584148, guid: 14ab64cc16702194ba2955c650986950, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 14ab64cc16702194ba2955c650986950, type: 3}
---- !u!82 &1554848826 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1251691436691451831, guid: 14ab64cc16702194ba2955c650986950, type: 3}
-  m_PrefabInstance: {fileID: 1554848825}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1556636729
 GameObject:
   m_ObjectHideFlags: 0
@@ -6837,7 +6839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3762969355161488076, guid: a78ec3488615000478e615a5102f4bc1, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3762969355161488076, guid: a78ec3488615000478e615a5102f4bc1, type: 3}
       propertyPath: m_AnchorMax.x
@@ -9171,7 +9173,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2085351141 stripped
 GameObject:
@@ -9549,6 +9551,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 859a65571dbe32d409272ad61b177d9d, type: 3}
+--- !u!4 &543450651960561394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147705451592}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 15.292, y: 0, z: 10.862}
+  m_LocalScale: {x: 0.07676445, y: 0.07676445, z: 0.07676445}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1196135536}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &543450651990393230
 Transform:
   m_ObjectHideFlags: 0
@@ -9566,6 +9583,51 @@ Transform:
   m_Father: {fileID: 1458126304}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 15.77, z: 0}
+--- !u!4 &543450652147821413
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148425421279}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 30.034, y: 0, z: 0.018}
+  m_LocalScale: {x: 0.07676445, y: 0.07676445, z: 0.07676445}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1196135536}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &543450652985263956
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148795203054}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.07676445, y: 0.07676445, z: 0.07676445}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1196135536}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &543450653481051204
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149272116990}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 29.339, y: -1.842, z: 32.599}
+  m_LocalScale: {x: 0.07676445, y: 0.07676445, z: 0.07676445}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1196135536}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &774882087220316296
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9591,6 +9653,70 @@ GameObject:
   m_Layer: 0
   m_Name: PC
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &919132147705451592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 543450651960561394}
+  m_Layer: 0
+  m_Name: PissBottleSpawn1
+  m_TagString: PissBottleSpawn
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &919132148425421279
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 543450652147821413}
+  m_Layer: 0
+  m_Name: PissBottleSpawn2
+  m_TagString: PissBottleSpawn
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &919132148795203054
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 543450652985263956}
+  m_Layer: 0
+  m_Name: PissBottleSpawn0
+  m_TagString: PissBottleSpawn
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &919132149272116990
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 543450653481051204}
+  m_Layer: 0
+  m_Name: PissBottleSpawn3
+  m_TagString: PissBottleSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10117,7 +10243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7519801221932845227, guid: c4c9d2b7cbae31d489d45f1b78cde2df, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7519801221932845227, guid: c4c9d2b7cbae31d489d45f1b78cde2df, type: 3}
       propertyPath: m_AnchorMax.x

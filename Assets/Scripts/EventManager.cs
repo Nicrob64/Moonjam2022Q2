@@ -58,4 +58,11 @@ public class EventManager : MonoBehaviour
         OnRoundTransitionComplete?.Invoke();
     }
 
+    // Event for when the player pisses in a bottle
+    public event Action OnPissInBottle;
+    public void StartPissingInBottle()
+    {
+        OnPissInBottle?.Invoke();
+    }
+
 }
