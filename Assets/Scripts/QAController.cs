@@ -101,18 +101,23 @@ public class QAController : MonoBehaviour
             {
                 cameraTarget = mainState;
             }
-
-
-            if (cameraTarget)
-            {
-                Vector3 newPos = Vector3.MoveTowards(Camera.main.transform.position, cameraTarget.position, cameraMoveMaxDelta);
-                Camera.main.transform.position = newPos;
-
-                Vector3 newEuler = Vector3.MoveTowards(Camera.main.transform.eulerAngles, cameraTarget.eulerAngles, cameraMoveAngleDelta);
-                Camera.main.transform.eulerAngles = newEuler;
-            }
+            
         }
 
+    }
+
+
+    private void FixedUpdate()
+    {
+        if (boxMoving) { return; }
+        if (cameraTarget)
+        {
+            Vector3 newPos = Vector3.MoveTowards(Camera.main.transform.position, cameraTarget.position, cameraMoveMaxDelta * Time.fixedDeltaTime);
+            Camera.main.transform.position = newPos;
+
+            Vector3 newEuler = Vector3.MoveTowards(Camera.main.transform.eulerAngles, cameraTarget.eulerAngles, cameraMoveAngleDelta * Time.fixedDeltaTime);
+            Camera.main.transform.eulerAngles = newEuler;
+        }
     }
 
     public void Submit(bool accepted)

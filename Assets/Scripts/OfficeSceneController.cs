@@ -62,6 +62,7 @@ public class OfficeSceneController : MonoBehaviour
         }
         else
         {
+            isQuestionCorpa = false;
             q -= corpoq.Count;
             prompt.text = eatTheRich[q];
         }

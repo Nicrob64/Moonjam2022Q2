@@ -333,8 +333,8 @@ MonoBehaviour:
   stamp: {fileID: 8300000, guid: 4e1f32ae573731748a263e9a3138bd4a, type: 3}
   conveyerLeft: {fileID: 404143656}
   conveyerRight: {fileID: 1170876558}
-  cameraMoveMaxDelta: 0.004
-  cameraMoveAngleDelta: 0.18
+  cameraMoveMaxDelta: 2
+  cameraMoveAngleDelta: 95
   boxMoveDuration: 5
   boxTime: 0
   badOrderChance: 0.27
