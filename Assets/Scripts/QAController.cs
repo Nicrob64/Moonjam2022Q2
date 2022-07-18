@@ -41,6 +41,8 @@ public class QAController : MonoBehaviour
     bool boxMoving = false;
     bool isBadOrder = false;
 
+    public int maxItems = 14;
+
     public void Start()
     {
         StartCoroutine(NewBox());
@@ -131,9 +133,16 @@ public class QAController : MonoBehaviour
     void CreateNewPackage()
     {
         Person p = nodejs.GetRandomPerson();
-        ListOfPickableItems items = pickable.GenerateShoppingList((ushort)Random.Range(1, 7));
-        string itemsString = string.Join(",", (from x in (items.Items) select x.ItemName));
+        ListOfPickableItems items = pickable.GenerateNonUniqueItemList((ushort)Random.Range(1, maxItems));
+        string itemsString = string.Join(", ", (from x in (items.Items) select x.ItemName));
         manifest.text = string.Format("CUSTOMER NAME\n{0} {1} {2}\n\nCONTACT INFORMATION\nEmail : {10}\nPhone: {11}\n\nADDRESS\n{3}, {4}, {5}, {6}, {7}\n\nITEMS:\n{8}\n\nTRACKING #\n{9}", p.Title, p.GivenName, p.Surname, p.StreetAddress, p.City, p.State, p.Country, p.ZipCode, itemsString, p.UPS, p.EmailAddress, p.TelephoneNumber);
+
+        
+        PickableItemInfo replaceItem = items.Items[Random.Range(0, items.Items.Count)];
+        pickable.GetRandomSingleItem(replaceItem);
+
+        var rand = new System.Random();
+        var randomizedItems = items.Items.OrderBy(_ => rand.Next()).ToList();
 
         Person label = p;
         if(Random.value < badOrderChance)
@@ -144,12 +153,12 @@ public class QAController : MonoBehaviour
         else
         {
             isBadOrder = false;
+            string whatsInBoxString = string.Join(", ", (from x in (randomizedItems) select x.ItemName));
+            whatsInBox.text = whatsInBoxString;
         }
 
 
         boxLabel.SetDetails(label);
 
     }
-
-
 }

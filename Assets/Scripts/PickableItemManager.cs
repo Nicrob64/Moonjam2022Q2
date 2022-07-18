@@ -57,17 +57,41 @@ public class PickableItemManager : MonoBehaviour
         }
     }
 
-    // public PickableItemInfo GetRandomItem()
-    // {
-    //     int rando = System.Random.Range(0, ItemList.Items.Count);
-    //     return ItemList.Items[rando];
-    // }
+    public PickableItemInfo GetRandomSingleItem()
+    { 
+        return ItemList.Items[UnityEngine.Random.Range(0, ItemList.Items.Count)];
+    }
+    public PickableItemInfo GetRandomSingleItem(PickableItemInfo butNotThis)
+    {
+        int index = UnityEngine.Random.Range(0, ItemList.Items.Count);
+        PickableItemInfo info = ItemList.Items[index];
+        if(info.ItemName == butNotThis.ItemName)
+        {
+            info = ItemList.Items[(index + 1) % ItemList.Items.Count];
+        }
+        return info;
+    }
 
+    public ListOfPickableItems GenerateNonUniqueItemList(ushort listSize)
+    {
+        if(listSize < 1)
+        {
+            throw new ArgumentException("Cannot create a list of size less than one");
+        }
+
+        ListOfPickableItems items = new ListOfPickableItems();
+        List<PickableItemInfo> myCoolItemList = new List<PickableItemInfo>();
+        for(int i=0; i<listSize; i++)
+        {
+            myCoolItemList.Add(ItemList.Items[UnityEngine.Random.Range(0, ItemList.Items.Count)]);
+        }
+        items.Items = myCoolItemList;
+        return items;
+    }
     public ListOfPickableItems GenerateShoppingList(ushort listSize)
     {
         if(listSize > ItemList.Items.Count)
         {
-            //We should be able to duplicate items though, I want to order 80 tails ya dig
             throw new ArgumentException(String.Format(
                 "Cannot create a list of {0} items as there are only {1} unique items",
                 listSize,
