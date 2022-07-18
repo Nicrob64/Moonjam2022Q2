@@ -86,26 +86,6 @@ public class PlayerInputHandler : MonoBehaviour
         return false;
     }
 
-    public bool GetCrouchInputDown()
-    {
-        if (CanProcessInput())
-        {
-            return Input.GetButtonDown(GameConstants.ButtonNameCrouch);
-        }
-
-        return false;
-    }
-
-    public bool GetCrouchInputReleased()
-    {
-        if (CanProcessInput())
-        {
-            return Input.GetButtonUp(GameConstants.ButtonNameCrouch);
-        }
-
-        return false;
-    }
-
     public bool GetInteractInputReleased()
     {
         if(CanProcessInput())

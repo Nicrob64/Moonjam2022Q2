@@ -73,13 +73,7 @@ public class PlayerCharacterController : MonoBehaviour
     public float CameraHeightRatio = 0.9f;
 
     [Tooltip("Height of character when standing")]
-    public float CapsuleHeightStanding = 1.8f;
-
-    [Tooltip("Height of character when crouching")]
-    public float CapsuleHeightCrouching = 0.9f;
-
-    [Tooltip("Speed of crouching transitions")]
-    public float CrouchingSharpness = 10f;
+    public float CapsuleHeight = 1.8f;
 
     [Header("Audio")] [Tooltip("Amount of footstep sounds played when moving one meter")]
     public float FootstepSfxFrequency = 1f;
@@ -119,7 +113,6 @@ public class PlayerCharacterController : MonoBehaviour
     public bool IsGrounded { get; private set; }
     public bool HasJumpedThisFrame { get; private set; }
     public bool IsDead { get; private set; }
-    public bool IsCrouching { get; private set; }
 
     public float Stamina { get; private set; }
 
@@ -139,7 +132,6 @@ public class PlayerCharacterController : MonoBehaviour
     float m_LastTimeJumped = 0f;
     float m_CameraVerticalAngle = 0f;
     float m_FootstepDistanceCounter;
-    float m_TargetCharacterHeight;
     private bool m_StaminaCooldown = false;
 
     const float k_JumpGroundingPreventionTime = 0.2f;
@@ -164,10 +156,9 @@ public class PlayerCharacterController : MonoBehaviour
 
         Stamina = MaxStamina;
 
-        // force the crouch state to false when starting
-        SetCrouchingState(false, true);
-        UpdateCharacterHeight(true);
-    }
+        m_Controller.height = CapsuleHeight;
+        m_Controller.center = Vector3.up * m_Controller.height * 0.5f;
+        PlayerCamera.transform.localPosition = Vector3.up * CapsuleHeight * CameraHeightRatio;    }
 
     void Update()
     {
@@ -203,14 +194,6 @@ public class PlayerCharacterController : MonoBehaviour
                 AudioSource.PlayOneShot(LandSfx);
             }
         }
-
-        // crouching
-        if (m_InputHandler.GetCrouchInputDown())
-        {
-            SetCrouchingState(!IsCrouching, false);
-        }
-
-        UpdateCharacterHeight(false);
 
         HandleCharacterMovement();
 
@@ -307,7 +290,6 @@ public class PlayerCharacterController : MonoBehaviour
         {
             if (isSprinting)
             {
-                isSprinting = SetCrouchingState(false, false);
                 Stamina -= StaminaDrainPerSecond * Time.deltaTime;
             }
             else if(Stamina < MaxStamina)
@@ -334,9 +316,7 @@ public class PlayerCharacterController : MonoBehaviour
             {
                 // calculate the desired velocity from inputs, max speed, and current slope
                 Vector3 targetVelocity = worldspaceMoveInput * MaxSpeedOnGround * speedModifier;
-                // reduce speed if crouching by crouch speed ratio
-                if (IsCrouching)
-                    targetVelocity *= MaxSpeedCrouchedRatio;
+
                 targetVelocity = GetDirectionReorientedOnSlope(targetVelocity.normalized, m_GroundNormal) *
                                     targetVelocity.magnitude;
 
@@ -347,26 +327,22 @@ public class PlayerCharacterController : MonoBehaviour
                 // jumping
                 if (IsGrounded && m_InputHandler.GetJumpInputDown())
                 {
-                    // force the crouch state to false
-                    if (SetCrouchingState(false, false))
-                    {
-                        // start by canceling out the vertical component of our velocity
-                        CharacterVelocity = new Vector3(CharacterVelocity.x, 0f, CharacterVelocity.z);
+                    // start by canceling out the vertical component of our velocity
+                    CharacterVelocity = new Vector3(CharacterVelocity.x, 0f, CharacterVelocity.z);
 
-                        // then, add the jumpSpeed value upwards
-                        CharacterVelocity += Vector3.up * JumpForce;
+                    // then, add the jumpSpeed value upwards
+                    CharacterVelocity += Vector3.up * JumpForce;
 
-                        // play sound
-                        AudioSource.PlayOneShot(JumpSfx);
+                    // play sound
+                    AudioSource.PlayOneShot(JumpSfx);
 
-                        // remember last time we jumped because we need to prevent snapping to ground for a short time
-                        m_LastTimeJumped = Time.time;
-                        HasJumpedThisFrame = true;
+                    // remember last time we jumped because we need to prevent snapping to ground for a short time
+                    m_LastTimeJumped = Time.time;
+                    HasJumpedThisFrame = true;
 
-                        // Force grounding to false
-                        IsGrounded = false;
-                        m_GroundNormal = Vector3.up;
-                    }
+                    // Force grounding to false
+                    IsGrounded = false;
+                    m_GroundNormal = Vector3.up;
                 }
 
                 // footsteps sound
@@ -454,66 +430,4 @@ public class PlayerCharacterController : MonoBehaviour
         return Vector3.Cross(slopeNormal, directionRight).normalized;
     }
 
-    void UpdateCharacterHeight(bool force)
-    {
-        // Update height instantly
-        if (force)
-        {
-            m_Controller.height = m_TargetCharacterHeight;
-            m_Controller.center = Vector3.up * m_Controller.height * 0.5f;
-            PlayerCamera.transform.localPosition = Vector3.up * m_TargetCharacterHeight * CameraHeightRatio;
-            // m_Actor.AimPoint.transform.localPosition = m_Controller.center;
-        }
-        // Update smooth height
-        else if (m_Controller.height != m_TargetCharacterHeight)
-        {
-            // resize the capsule and adjust camera position
-            m_Controller.height = Mathf.Lerp(m_Controller.height, m_TargetCharacterHeight,
-                CrouchingSharpness * Time.deltaTime);
-            m_Controller.center = Vector3.up * m_Controller.height * 0.5f;
-            PlayerCamera.transform.localPosition = Vector3.Lerp(PlayerCamera.transform.localPosition,
-                Vector3.up * m_TargetCharacterHeight * CameraHeightRatio, CrouchingSharpness * Time.deltaTime);
-            // m_Actor.AimPoint.transform.localPosition = m_Controller.center;
-        }
-    }
-
-    // returns false if there was an obstruction
-    bool SetCrouchingState(bool crouched, bool ignoreObstructions)
-    {
-        // set appropriate heights
-        if (crouched)
-        {
-            m_TargetCharacterHeight = CapsuleHeightCrouching;
-        }
-        else
-        {
-            // Detect obstructions
-            if (!ignoreObstructions)
-            {
-                Collider[] standingOverlaps = Physics.OverlapCapsule(
-                    GetCapsuleBottomHemisphere(),
-                    GetCapsuleTopHemisphere(CapsuleHeightStanding),
-                    m_Controller.radius,
-                    -1,
-                    QueryTriggerInteraction.Ignore);
-                foreach (Collider c in standingOverlaps)
-                {
-                    if (c != m_Controller)
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            m_TargetCharacterHeight = CapsuleHeightStanding;
-        }
-
-        // if (OnStanceChanged != null)
-        // {
-        //     OnStanceChanged.Invoke(crouched);
-        // }
-
-        IsCrouching = crouched;
-        return true;
-    }
 }
