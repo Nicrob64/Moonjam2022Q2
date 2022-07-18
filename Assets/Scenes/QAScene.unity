@@ -313,8 +313,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b75b25f1be17ba047872c283a2faa1f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quotaRemaining: 20
-  failuresTillGameOver: 5
+  quotaRemaining: 10
+  failuresTillGameOver: 3
   nodejs: {fileID: 294639378}
   pickable: {fileID: 294639380}
   remainingMesh: {fileID: 985516570}
@@ -2278,7 +2278,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 20
+  m_text: 10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 75e0a3a16cec10a458d73fe257d473c5, type: 2}
   m_sharedMaterial: {fileID: 4862718181262176736, guid: 75e0a3a16cec10a458d73fe257d473c5, type: 2}
