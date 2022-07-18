@@ -1394,6 +1394,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1706365807}
     m_Modifications:
+    - target: {fileID: 1045930603787555130, guid: 36805349839e25d4e9d8262ad3ec2b44, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1045930603787555131, guid: 36805349839e25d4e9d8262ad3ec2b44, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -3238,7 +3242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1058171846, guid: 5e904d32c04ee2d42a0eed09244c0212, type: 3}
       propertyPath: m_text
-      value: Submit the order button
+      value: ADVANCEMENT CONTROL BUTTON
       objectReference: {fileID: 0}
     - target: {fileID: 1058171846, guid: 5e904d32c04ee2d42a0eed09244c0212, type: 3}
       propertyPath: m_margin.x
@@ -3478,6 +3482,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e07a7478c967c004991bd9482b093d3f, type: 3}
   startAnnouncement: {fileID: 8300000, guid: 769a2019807b3e84c9330d6d940afa75, type: 3}
   stopAnnouncement: {fileID: 8300000, guid: 1c2043af667b0274ead9183f7f534b2e, type: 3}
+  originalJam: {fileID: 0}
   minWaitTime: 15
   maxWaitTime: 30
 --- !u!114 &787449833
@@ -3494,10 +3499,158 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shouldRun: 1
   events:
-  - time: 5
+  - time: 2
     ev:
       m_PersistentCalls:
         m_Calls:
+        - m_Target: {fileID: 787449832}
+          m_TargetAssemblyTypeName: Announcement, Assembly-CSharp
+          m_MethodName: PlayClip
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: 27b9cfdb263f60040970b425d09bc1d8, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    done: 0
+  - time: 10
+    ev:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 787449832}
+          m_TargetAssemblyTypeName: Announcement, Assembly-CSharp
+          m_MethodName: PlayClip
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: 0b9bd40b54cfc7b4a9d3edc7b5dd2089, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    done: 0
+  - time: 25
+    ev:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 787449832}
+          m_TargetAssemblyTypeName: Announcement, Assembly-CSharp
+          m_MethodName: PlayClip
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: e1d7c77f46a0a1b4db2e7680934ab82e, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    done: 0
+  - time: 40
+    ev:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 787449832}
+          m_TargetAssemblyTypeName: Announcement, Assembly-CSharp
+          m_MethodName: PlayClip
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: c51f33a7b1dc75f41912379d0f723b0b, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    done: 0
+  - time: 49
+    ev:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 787449832}
+          m_TargetAssemblyTypeName: Announcement, Assembly-CSharp
+          m_MethodName: PlayClip
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: 1cd561c5ec8617a458bb76905a02b80e, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    done: 0
+  - time: 60
+    ev:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 787449832}
+          m_TargetAssemblyTypeName: Announcement, Assembly-CSharp
+          m_MethodName: PlayClip
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: 7a6177d644a87e14a80fd1bc182dfea1, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    done: 0
+  - time: 71
+    ev:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 787449832}
+          m_TargetAssemblyTypeName: Announcement, Assembly-CSharp
+          m_MethodName: PlayClip
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: b5ff9346ba4d44940be400e1d1c8367e, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    done: 0
+  - time: 91
+    ev:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 787449832}
+          m_TargetAssemblyTypeName: Announcement, Assembly-CSharp
+          m_MethodName: PlayClip
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: 11c4a4eb48f5b6c4aa873f6a9c9ea434, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    done: 0
+  - time: 103
+    ev:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 787449832}
+          m_TargetAssemblyTypeName: Announcement, Assembly-CSharp
+          m_MethodName: StartBGM
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
         - m_Target: {fileID: 787449832}
           m_TargetAssemblyTypeName: Announcement, Assembly-CSharp
           m_MethodName: StartAnnouncements
@@ -4457,6 +4610,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1706365807}
     m_Modifications:
+    - target: {fileID: 1045930603787555130, guid: 36805349839e25d4e9d8262ad3ec2b44, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1045930603787555131, guid: 36805349839e25d4e9d8262ad3ec2b44, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -6058,8 +6215,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Bathroom
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 75e0a3a16cec10a458d73fe257d473c5, type: 2}
+  m_sharedMaterial: {fileID: 4862718181262176736, guid: 75e0a3a16cec10a458d73fe257d473c5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6148,7 +6305,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 4862718181262176736, guid: 75e0a3a16cec10a458d73fe257d473c5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6267,10 +6424,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Generate Order
+  m_text: 'Order Producer
+
+'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 75e0a3a16cec10a458d73fe257d473c5, type: 2}
+  m_sharedMaterial: {fileID: 4862718181262176736, guid: 75e0a3a16cec10a458d73fe257d473c5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6359,7 +6518,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 4862718181262176736, guid: 75e0a3a16cec10a458d73fe257d473c5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8277,6 +8436,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1706365807}
     m_Modifications:
+    - target: {fileID: 1045930603787555130, guid: 36805349839e25d4e9d8262ad3ec2b44, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1045930603787555131, guid: 36805349839e25d4e9d8262ad3ec2b44, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -9394,6 +9557,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1706365807}
     m_Modifications:
+    - target: {fileID: 1045930603787555130, guid: 36805349839e25d4e9d8262ad3ec2b44, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1045930603787555131, guid: 36805349839e25d4e9d8262ad3ec2b44, type: 3}
       propertyPath: m_RootOrder
       value: 0

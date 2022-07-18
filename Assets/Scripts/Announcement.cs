@@ -11,7 +11,7 @@ public class Announcement : MonoBehaviour
 
     protected bool makingAnnouncement = false;
     protected float musicLoopTime;
-    protected AudioClip originalJam;
+    public AudioClip originalJam;
 
     public float minWaitTime = 15.0f;
     public float maxWaitTime = 30.0f;
@@ -44,7 +44,7 @@ public class Announcement : MonoBehaviour
         {
             a.loop = false;
         }
-        originalJam = audioSources[0].clip;
+        //originalJam = audioSources[0].clip;
 
         StartCoroutine(PlayRandomClip());
     }
@@ -89,13 +89,34 @@ public class Announcement : MonoBehaviour
     }
 
 
-   /* private void Update()
+    /// <summary>
+    /// for playing tutorial
+    /// </summary>
+    /// <param name="clip"></param>
+    public void PlayClip(AudioClip clip)
     {
-        if (Input.GetKeyDown(KeyCode.Keypad0) && !makingAnnouncement)
+        foreach (AudioSource a in audioSources)
         {
-            MakeAnnouncement();
+            a.Pause();
+            a.clip = clip;
+            a.time = 0;
+            a.loop = false;
+            a.Play();
         }
-    }*/
+    }
+
+
+    public void StartBGM()
+    {
+        foreach (AudioSource a in audioSources)
+        {
+            a.Pause();
+            a.clip = originalJam;
+            a.time = 0;
+            a.loop = true;
+            a.Play();
+        }
+    }
 
 
 }
