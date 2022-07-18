@@ -2249,7 +2249,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     done: 0
-  - time: 2
+  - time: 1
     ev:
       m_PersistentCalls:
         m_Calls:
@@ -2266,7 +2266,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     done: 0
-  - time: 4
+  - time: 2
     ev:
       m_PersistentCalls:
         m_Calls:
@@ -2283,7 +2283,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     done: 0
-  - time: 6
+  - time: 3
     ev:
       m_PersistentCalls:
         m_Calls:
@@ -2296,6 +2296,18 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 298274313}
+          m_TargetAssemblyTypeName: Piss, Assembly-CSharp
+          m_MethodName: StartToiletPissCoroutine
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 4
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -6584,13 +6596,41 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
+      propertyPath: Zip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1bff3d95c109a05438f62e0643f6cfda, type: 3}
+    - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
+      propertyPath: Flush
+      value: 
+      objectReference: {fileID: 8300000, guid: 79c01d9428a004b4192fa897792371a3, type: 3}
+    - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
+      propertyPath: Unzip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2f3990a91e4dd97409cc4757a466d8bf, type: 3}
+    - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
       propertyPath: pissCutscene
       value: 
       objectReference: {fileID: 537476106}
     - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
+      propertyPath: ToiletPissEnd
+      value: 
+      objectReference: {fileID: 8300000, guid: f2e431fcebc74f348894b87d1aeebacd, type: 3}
+    - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
+      propertyPath: PissAudioSource
+      value: 
+      objectReference: {fileID: 1554848826}
+    - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
+      propertyPath: ToiletPissStart
+      value: 
+      objectReference: {fileID: 8300000, guid: d71f0e109d32c9441abfe72ef605ae11, type: 3}
+    - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
       propertyPath: PlayerController
       value: 
       objectReference: {fileID: 298274316}
+    - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
+      propertyPath: ToiletPissMiddle
+      value: 
+      objectReference: {fileID: 8300000, guid: d5022784f3d4e2f4fbc3b05eb456e5d9, type: 3}
     - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
       propertyPath: PissGainPerSecond
       value: 1
@@ -6658,6 +6698,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 6361941578125584148, guid: 14ab64cc16702194ba2955c650986950, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 14ab64cc16702194ba2955c650986950, type: 3}
+--- !u!82 &1554848826 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1251691436691451831, guid: 14ab64cc16702194ba2955c650986950, type: 3}
+  m_PrefabInstance: {fileID: 1554848825}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1556636729
 GameObject:
   m_ObjectHideFlags: 0
