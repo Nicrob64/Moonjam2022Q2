@@ -6638,6 +6638,18 @@ PrefabInstance:
       propertyPath: pissCutscene
       value: 
       objectReference: {fileID: 537476106}
+    - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
+      propertyPath: BottlePissEnd
+      value: 
+      objectReference: {fileID: 8300000, guid: a092c6fb91c43cb479c47c6eb5cfef5a, type: 3}
+    - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
+      propertyPath: BottlePissStart
+      value: 
+      objectReference: {fileID: 8300000, guid: bddb8b406608f434db329793404d47b1, type: 3}
+    - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
+      propertyPath: BottlePissMiddle
+      value: 
+      objectReference: {fileID: 8300000, guid: e20ff39550956ff4b858f08507b5a0f6, type: 3}
     - target: {fileID: 2528483006977297365, guid: 14ab64cc16702194ba2955c650986950, type: 3}
       propertyPath: m_Depth
       value: 1
@@ -9617,7 +9629,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149272116990}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 29.339, y: -1.842, z: 32.599}
+  m_LocalPosition: {x: 28.763, y: -1.842, z: 32.334}
   m_LocalScale: {x: 0.07676445, y: 0.07676445, z: 0.07676445}
   m_ConstrainProportionsScale: 0
   m_Children: []
