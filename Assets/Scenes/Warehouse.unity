@@ -3515,7 +3515,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e07a7478c967c004991bd9482b093d3f, type: 3}
   startAnnouncement: {fileID: 8300000, guid: 769a2019807b3e84c9330d6d940afa75, type: 3}
   stopAnnouncement: {fileID: 8300000, guid: 1c2043af667b0274ead9183f7f534b2e, type: 3}
-  originalJam: {fileID: 0}
+  originalJam: {fileID: 8300000, guid: d9c61991087309c45bce5652c4f96152, type: 3}
   minWaitTime: 15
   maxWaitTime: 30
 --- !u!114 &787449833

@@ -5,6 +5,10 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
 
+    public AudioSource PickupAudioSource;
+    public AudioClip PickupAudioClip;
+    public AudioClip BadPickupAudioClip;
+
     public Dictionary<PickableItemInfo, int> ItemsHeld = new Dictionary<PickableItemInfo, int>();
 
     public void RefreshShoppingList()
@@ -29,9 +33,12 @@ public class Inventory : MonoBehaviour
     {
         if(!ItemsHeld.ContainsKey(item))
         {
+            PickupAudioSource?.PlayOneShot(BadPickupAudioClip);
             // Can't pick up an item that isn't on the current list
             return;
         }
+
+        PickupAudioSource?.PlayOneShot(PickupAudioClip);
 
         ItemsHeld[item] += 1;
 
