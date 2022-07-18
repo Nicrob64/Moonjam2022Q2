@@ -6638,10 +6638,6 @@ PrefabInstance:
       propertyPath: pissCutscene
       value: 
       objectReference: {fileID: 537476106}
-    - target: {fileID: 1463406967535659735, guid: 14ab64cc16702194ba2955c650986950, type: 3}
-      propertyPath: PissGainPerSecond
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 2528483006977297365, guid: 14ab64cc16702194ba2955c650986950, type: 3}
       propertyPath: m_Depth
       value: 1
