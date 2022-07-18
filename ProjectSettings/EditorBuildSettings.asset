@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ManagerOffice.unity
     guid: 721feea5dee10dd4a8e380e7e12967ae
+  - enabled: 1
+    path: Assets/Scenes/Ending.unity
+    guid: e4a2cb1bef0588649906712868299b39
   - enabled: 0
     path: Assets/Scenes/QTEScene.unity
     guid: 63d2a10a7144b4d4c94b606ad1d5e2fe

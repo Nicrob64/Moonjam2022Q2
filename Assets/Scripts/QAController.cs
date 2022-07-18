@@ -18,7 +18,7 @@ public class QAController : MonoBehaviour
     public PackageManager nodejs;
     public PickableItemManager pickable;
 
-    public TextMeshProUGUI remainingMesh;
+    public TMP_Text remainingMesh;
 
     public Transform mainState;
     public Transform lookAtBox;
