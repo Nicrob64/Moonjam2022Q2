@@ -13,6 +13,13 @@ public class PlayerCharacterController : MonoBehaviour
     [Tooltip("Audio source for footsteps, jump, etc...")]
     public AudioSource AudioSource;
 
+    public Transform ClipboardTransform;
+    public Transform ClipboardDefaultPosition;
+    public Transform ClipboardRaisedPosition;
+
+    public float ClipboardMoveMaxDelta = 0.01f;
+    public float ClipboardMoveAngleDelta = 1f;
+
     [Header("General")]
     [Tooltip("The distance at which the player can pick up an object")]
     public float PickupDistance = 1.0f;
@@ -196,11 +203,8 @@ public class PlayerCharacterController : MonoBehaviour
         }
 
         HandleCharacterMovement();
-
-        if(m_InputHandler.GetInteractInputReleased())
-        {
-            HandleInteractPressed();
-        }
+        HandleInteraction();
+        HandleClipboardZoom();
     }
 
     void OnDie()
@@ -251,8 +255,10 @@ public class PlayerCharacterController : MonoBehaviour
         }
     }
 
-    void HandleInteractPressed()
+    void HandleInteraction()
     {
+        if(!m_InputHandler.GetInteractInputReleased()) return;
+        
         Ray ray = PlayerCamera.ViewportPointToRay(Vector3.one / 2f);
         Debug.DrawRay(ray.origin, ray.direction * 2f, Color.red);
 
@@ -261,6 +267,24 @@ public class PlayerCharacterController : MonoBehaviour
             var interactable = hitInfo.collider.GetComponent<Interactable>();
             interactable?.Interact();
         }
+    }
+
+    void HandleClipboardZoom()
+    {
+
+        Transform target = ClipboardDefaultPosition;
+
+        if(m_InputHandler.GetZoomInButtonHeld())
+        {
+            target = ClipboardRaisedPosition;
+        }
+
+        Vector3 newPos = Vector3.MoveTowards(ClipboardTransform.position, target.position, ClipboardMoveMaxDelta);
+        ClipboardTransform.position = newPos;
+
+        Vector3 newEuler = Vector3.MoveTowards(ClipboardTransform.eulerAngles, target.eulerAngles, ClipboardMoveAngleDelta);
+        ClipboardTransform.eulerAngles = newEuler;
+
     }
 
     void HandleCharacterMovement()
@@ -394,7 +418,10 @@ public class PlayerCharacterController : MonoBehaviour
 
     bool CanSprint()
     {
-        if(m_StaminaCooldown || MovementFrozen) return false;
+        if(m_StaminaCooldown || MovementFrozen || m_InputHandler.GetZoomInButtonHeld())
+        {
+            return false;
+        }
         
         if(Stamina < 1.0f)
         {

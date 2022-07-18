@@ -7,7 +7,7 @@ public class GameConstants
     public const string MouseAxisNameVertical = "Mouse Y";
     public const string MouseAxisNameHorizontal = "Mouse X";
     
-    public const string ButtonNameAim = "Aim";
+    public const string ButtonNameZoom = "ZoomIn";
     public const string ButtonNameInteract = "Interact";
     public const string ButtonNameSprint = "Sprint";
     public const string ButtonNameJump = "Jump";

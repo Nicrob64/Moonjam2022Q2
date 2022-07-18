@@ -96,6 +96,16 @@ public class PlayerInputHandler : MonoBehaviour
         return false;
     }
 
+    public bool GetZoomInButtonHeld()
+    {
+        if(CanProcessInput())
+        {
+            return Input.GetButton(GameConstants.ButtonNameZoom);
+        }
+
+        return false;
+    }
+
     float GetMouseLookAxis(string axisName)
     {
         if (CanProcessInput())
