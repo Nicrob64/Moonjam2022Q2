@@ -27,7 +27,8 @@ public class PlayerInputHandler : MonoBehaviour
 
     public bool CanProcessInput()
     {
-        return Cursor.lockState == CursorLockMode.Locked;
+        return GameStateManager.Instance.CurrentState == GameState.Playing &&
+            Cursor.lockState == CursorLockMode.Locked;
     }
 
     public Vector3 GetMoveInput()
@@ -86,31 +87,21 @@ public class PlayerInputHandler : MonoBehaviour
         return false;
     }
 
-    public bool GetCrouchInputDown()
-    {
-        if (CanProcessInput())
-        {
-            return Input.GetButtonDown(GameConstants.ButtonNameCrouch);
-        }
-
-        return false;
-    }
-
-    public bool GetCrouchInputReleased()
-    {
-        if (CanProcessInput())
-        {
-            return Input.GetButtonUp(GameConstants.ButtonNameCrouch);
-        }
-
-        return false;
-    }
-
     public bool GetInteractInputReleased()
     {
         if(CanProcessInput())
         {
             return Input.GetButtonUp(GameConstants.ButtonNameInteract);
+        }
+
+        return false;
+    }
+
+    public bool GetZoomInButtonHeld()
+    {
+        if(CanProcessInput())
+        {
+            return Input.GetButton(GameConstants.ButtonNameZoom);
         }
 
         return false;

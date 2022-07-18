@@ -52,7 +52,7 @@ public class PickableItemManager : MonoBehaviour
             }
 
             PickableItemInfo info = ItemList.Items[i % ItemList.Items.Count];
-            Debug.Log(string.Format("Set {0} item value to {1} {2}", item, info.ItemName, info.TexturePath));
+            // Debug.Log(string.Format("Set {0} item value to {1} {2}", item, info.ItemName, info.TexturePath));
             item.ItemInfo = info;
         }
     }
@@ -92,10 +92,12 @@ public class PickableItemManager : MonoBehaviour
     {
         if(listSize > ItemList.Items.Count)
         {
-            throw new ArgumentException(String.Format(
+            Debug.LogWarning(String.Format(
                 "Cannot create a list of {0} items as there are only {1} unique items",
                 listSize,
                 ItemList.Items.Count));
+
+            listSize = (ushort) ItemList.Items.Count;
         }
 
         var rand = new System.Random();
@@ -106,8 +108,10 @@ public class PickableItemManager : MonoBehaviour
             randomizedItems.RemoveRange(listSize, ItemList.Items.Count - listSize);
         }
 
-        var shoppingList = new ListOfPickableItems();
-        shoppingList.Items = randomizedItems;
+        var shoppingList = new ListOfPickableItems()
+        {
+            Items = randomizedItems
+        };
 
         return shoppingList;
     }

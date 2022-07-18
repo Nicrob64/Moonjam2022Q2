@@ -35,7 +35,6 @@ public class EventManager : MonoBehaviour
     public event Action<Dictionary<PickableItemInfo, int>> OnShoppingListChanged;
     public void ShoppingListChanged(Dictionary<PickableItemInfo, int> list)
     {
-        Debug.Log(OnShoppingListChanged);
         OnShoppingListChanged?.Invoke(list);
     }
 
@@ -43,6 +42,20 @@ public class EventManager : MonoBehaviour
     public void ItemPicked(PickableItemInfo item)
     {
         OnItemPicked?.Invoke(item);
+    }
+
+    // Event for when the player has completed a round (fulfilled their daily quota)
+    public event Action OnRoundComplete;
+    public void RoundComplete()
+    {
+        OnRoundComplete?.Invoke();
+    }
+
+    // Event for when the visual transition between rounds has finished
+    public event Action OnRoundTransitionComplete;
+    public void RoundTransitionComplete()
+    {
+        OnRoundTransitionComplete?.Invoke();
     }
 
 }

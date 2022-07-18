@@ -28,15 +28,27 @@ public class Piss : MonoBehaviour
         }
     }
 
-    void Awake()
+    public void Reset()
     {
         CurrentPiss = 0;
         PissOverloadTimer = 0;
     }
 
+    void Awake()
+    {
+        Reset();
+
+        EventManager.Instance.OnRoundComplete += Reset;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if(GameStateManager.Instance.CurrentState == GameState.Paused)
+        {
+            return;
+        }
+
         if(_pissing)
         {
             CurrentPiss -= (MaxPiss / PissDuration) * Time.deltaTime;
@@ -59,8 +71,8 @@ public class Piss : MonoBehaviour
         if(PissOverloadTimer > PissGraceTimer)
         {
             // You pissed yourself!
-            Debug.LogWarning("You pissed yourself!");
-            PlayerController.gameObject.SetActive(false);
+            Debug.Log("You pissed yourself!");
+            SceneTransitionHelper.Instance.TransitionReason = TransitionReason.GameOverPissedYourself;
 
             SceneManager.LoadScene("GameOver");
         }
