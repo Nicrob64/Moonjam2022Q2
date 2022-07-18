@@ -642,6 +642,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9d5e9a4b5619074f974f1a53a2eba23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PickupAudioSource: {fileID: 1251691436691451831}
+  PickupAudioClip: {fileID: 8300000, guid: afcfe60cb9b16314f97ac2628cb22cc4, type: 3}
+  BadPickupAudioClip: {fileID: 8300000, guid: f34e0c03467704d43be535b68f9e4c96, type: 3}
 --- !u!114 &1463406967535659735
 MonoBehaviour:
   m_ObjectHideFlags: 0

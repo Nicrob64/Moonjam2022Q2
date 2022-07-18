@@ -21,21 +21,21 @@ Welcome to your new job at Zeal, the world's foremost company for online shoppin
 * Ctrl + Shift + 3 - Skip to level 3
 
 ## Credits
-**Executive Producer**
-SomeGuy @fartguy_
+**Executive Producer**  
+SomeGuy @fartguy_  
 
-**Programming**
-Dag
-SomeGuy @fartguy_
+**Programming**  
+Dag  
+SomeGuy @fartguy_  
 
-**Writing**
-MushyTales
+**Writing**  
+MushyTales  
 
-**Art**
-aurumzo @aurumillo
+**Art**  
+aurumzo @aurumillo  
 
-**Music**
-halfmelt
+**Music**  
+halfmelt  
 
-**Narrator**
-MushyTales
+**Narrator**  
+MushyTales  

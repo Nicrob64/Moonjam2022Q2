@@ -6773,6 +6773,14 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5985416117277580041, guid: 14ab64cc16702194ba2955c650986950, type: 3}
+      propertyPath: MaxSpeedOnGround
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5985416117277580041, guid: 14ab64cc16702194ba2955c650986950, type: 3}
+      propertyPath: SprintSpeedModifier
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5985416117277580041, guid: 14ab64cc16702194ba2955c650986950, type: 3}
       propertyPath: ClipboardMoveMaxDelta
       value: 2
       objectReference: {fileID: 0}
