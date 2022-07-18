@@ -11,6 +11,9 @@ public class Piss : MonoBehaviour
     public AudioClip ToiletPissStart;
     public AudioClip ToiletPissMiddle;
     public AudioClip ToiletPissEnd;
+    public AudioClip BottlePissStart;
+    public AudioClip BottlePissMiddle;
+    public AudioClip BottlePissEnd;
     public AudioClip Flush;
     public AudioClip Zip;
 
@@ -37,8 +40,41 @@ public class Piss : MonoBehaviour
         }
     }
 
+    IEnumerator PlayBottlePissAudio()
+    {
+         PissAudioSource.PlayOneShot(Unzip);
+        yield return new WaitForSeconds(Unzip.length);
+
+        PissAudioSource.PlayOneShot(BottlePissStart);
+        yield return new WaitForSeconds(ToiletPissStart.length);
+
+        PissAudioSource.clip = BottlePissMiddle;
+        PissAudioSource.loop = true;
+        PissAudioSource.Play();
+        while(Pissing)
+        {
+            yield return null;
+        }
+
+        PissAudioSource.Stop();
+        PissAudioSource.loop = false;
+
+        PissAudioSource.PlayOneShot(BottlePissEnd);
+        yield return new WaitForSeconds(ToiletPissEnd.length);
+
+        PissAudioSource.PlayOneShot(Zip);
+        yield return new WaitForSeconds(Zip.length);
+    }
+
     IEnumerator PlayToiletPissAudio(float duration)
     {
+        float loopDuration = duration
+            - Unzip.length
+            - ToiletPissStart.length
+            - ToiletPissEnd.length
+            - Flush.length
+            - Zip.length;
+
         PissAudioSource.PlayOneShot(Unzip);
         yield return new WaitForSeconds(Unzip.length);
 
@@ -48,7 +84,7 @@ public class Piss : MonoBehaviour
         PissAudioSource.clip = ToiletPissMiddle;
         PissAudioSource.loop = true;
         PissAudioSource.Play();
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(loopDuration);
 
         PissAudioSource.Stop();
         PissAudioSource.loop = false;
@@ -61,17 +97,19 @@ public class Piss : MonoBehaviour
 
         PissAudioSource.PlayOneShot(Zip);
         yield return new WaitForSeconds(Zip.length);
-    }
+    }        
 
-    public void StartToiletPissCoroutine(float duration)
-    {
-        StartCoroutine(PlayToiletPissAudio(duration));
-    }
-
-    public void StartPissingNOW()
+    public void PissInBathroom()
     {
         Pissing = true;
         pissCutscene.Play();
+        StartCoroutine(PlayToiletPissAudio(pissCutscene.GetDuration()));
+    }
+
+    public void PissInBottle()
+    {
+        Pissing = true;
+        StartCoroutine(PlayBottlePissAudio());
     }
 
     public void Reset()
@@ -85,6 +123,7 @@ public class Piss : MonoBehaviour
         Reset();
 
         EventManager.Instance.OnRoundComplete += Reset;
+        EventManager.Instance.OnPissInBottle += PissInBottle;
     }
 
     // Update is called once per frame
@@ -95,7 +134,7 @@ public class Piss : MonoBehaviour
             return;
         }
 
-        if(_pissing)
+        if(Pissing)
         {
             CurrentPiss -= (MaxPiss / PissDuration) * Time.deltaTime;
             if(CurrentPiss <= 0)

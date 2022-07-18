@@ -655,10 +655,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerController: {fileID: 5985416117277580041}
+  PissAudioSource: {fileID: 1251691436691451831}
+  Unzip: {fileID: 8300000, guid: 2f3990a91e4dd97409cc4757a466d8bf, type: 3}
+  ToiletPissStart: {fileID: 8300000, guid: d71f0e109d32c9441abfe72ef605ae11, type: 3}
+  ToiletPissMiddle: {fileID: 8300000, guid: d5022784f3d4e2f4fbc3b05eb456e5d9, type: 3}
+  ToiletPissEnd: {fileID: 8300000, guid: f2e431fcebc74f348894b87d1aeebacd, type: 3}
+  BottlePissStart: {fileID: 8300000, guid: a80e293f7a6266a42ab9821b0aa45845, type: 3}
+  BottlePissMiddle: {fileID: 8300000, guid: a0a9553fc0f71d24bbc4642825050e6b, type: 3}
+  BottlePissEnd: {fileID: 8300000, guid: 2dc4ccf7201702243bbbadff5b8c490e, type: 3}
+  Flush: {fileID: 8300000, guid: 79c01d9428a004b4192fa897792371a3, type: 3}
+  Zip: {fileID: 8300000, guid: 1bff3d95c109a05438f62e0643f6cfda, type: 3}
   MaxPiss: 100
   PissGainPerSecond: 1
-  PissGraceTimer: 5
+  PissGraceTimer: 6
   PissDuration: 10
+  pissCutscene: {fileID: 0}
 --- !u!1 &5985416117364206623
 GameObject:
   m_ObjectHideFlags: 0
