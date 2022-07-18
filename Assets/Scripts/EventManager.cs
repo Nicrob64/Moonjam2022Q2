@@ -35,7 +35,6 @@ public class EventManager : MonoBehaviour
     public event Action<Dictionary<PickableItemInfo, int>> OnShoppingListChanged;
     public void ShoppingListChanged(Dictionary<PickableItemInfo, int> list)
     {
-        Debug.Log(OnShoppingListChanged);
         OnShoppingListChanged?.Invoke(list);
     }
 

@@ -59,8 +59,8 @@ public class Piss : MonoBehaviour
         if(PissOverloadTimer > PissGraceTimer)
         {
             // You pissed yourself!
-            Debug.LogWarning("You pissed yourself!");
-            PlayerController.gameObject.SetActive(false);
+            Debug.Log("You pissed yourself!");
+            SceneTransitionHelper.Instance.TransitionReason = TransitionReason.GameOverPissedYourself;
 
             SceneManager.LoadScene("GameOver");
         }

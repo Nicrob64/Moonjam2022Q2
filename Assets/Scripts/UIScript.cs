@@ -45,8 +45,6 @@ public class UIScript : MonoBehaviour
                 text += item.Key.ItemName + "\n";
             }
         }
-
-        Debug.Log(text);
         
         ShoppingList.text = text;
     }

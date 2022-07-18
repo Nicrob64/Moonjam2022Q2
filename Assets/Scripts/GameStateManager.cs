@@ -1,5 +1,12 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public enum GameState
+{
+    Playable,
+    TransitionBetweenRounds
+}
 
 public struct GameRound
 {
@@ -24,8 +31,8 @@ public class GameStateManager : MonoBehaviour
         new GameRound { RoundTime = 360, Quota = 10, ItemsPerOrder = 6, OrderSizeModifier = 2 }
     };
     private ushort _currentRoundIndex = 0;
+    private readonly System.Random _rand = new();
     private static GameStateManager _instance;
-    private System.Random _rand = new();
 
     public static GameStateManager Instance
     {
@@ -36,6 +43,8 @@ public class GameStateManager : MonoBehaviour
     {
         get { return _rounds[_currentRoundIndex]; }
     }
+
+    public GameState CurrentState { get; private set; }
 
     public ushort OrdersRemainingForDailyQuota { get; private set; }
 
@@ -90,6 +99,7 @@ public class GameStateManager : MonoBehaviour
             _instance = this;
         }
 
+        CurrentState = GameState.Playable;
         OrdersRemainingForDailyQuota = CurrentRound.Quota;
         RemainingTimeInRound = CurrentRound.RoundTime;
     }
@@ -99,5 +109,13 @@ public class GameStateManager : MonoBehaviour
     void Update()
     {
         RemainingTimeInRound -= Time.deltaTime;
+
+        if(RemainingTimeInRound <= 0 && OrdersRemainingForDailyQuota > 0)
+        {
+            Debug.Log("You didn't meet your daily quota!");
+            SceneTransitionHelper.Instance.TransitionReason = TransitionReason.GameOverFailedQuota;
+
+            SceneManager.LoadScene("GameOver");
+        }
     }
 }

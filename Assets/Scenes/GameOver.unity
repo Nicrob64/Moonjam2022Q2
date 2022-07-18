@@ -374,6 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 007d6b4d6a3cf454695f568e155dae46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ReasonMessageText: {fileID: 1259251224}
 --- !u!1 &1037381423
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,7 +546,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 54}
-  m_SizeDelta: {x: 400, y: 50}
+  m_SizeDelta: {x: 800, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1259251224
 MonoBehaviour:

@@ -30,7 +30,6 @@ public class PickableItem : MonoBehaviour
         {
             _itemInfo = value;
             Image = Resources.Load<Texture2D>(_itemInfo.TexturePath);
-            // Debug.Log(Image);
             LabelRenderer.material.SetTexture("_MainTex", Image);
         }
     }
