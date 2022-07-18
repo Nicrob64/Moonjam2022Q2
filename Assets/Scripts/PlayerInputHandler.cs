@@ -91,7 +91,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if(CanProcessInput())
         {
-            return Input.GetButtonUp(GameConstants.ButtonNameInteract);
+            return Input.GetButtonUp(GameConstants.ButtonNameInteract) || Input.GetMouseButtonUp(0);
         }
 
         return false;

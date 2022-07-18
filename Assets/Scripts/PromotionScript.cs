@@ -8,6 +8,10 @@ public class PromotionScript : MonoBehaviour
 {
     public Text promotionText;
 
+    public AudioClip p1;
+    public AudioClip p2;
+    public AudioSource asource;
+
     void Awake()
     {
         Cursor.lockState = CursorLockMode.None;
@@ -19,6 +23,19 @@ public class PromotionScript : MonoBehaviour
                 break;
             case TransitionReason.PromotionToManager:
                 promotionText.text = "You have been promoted to\nLocal Branch Manager";
+                break;
+        }
+    }
+
+    public void PlayPromotionText()
+    {
+        switch (SceneTransitionHelper.Instance.TransitionReason)
+        {
+            case TransitionReason.PromotionToQA:
+                asource.PlayOneShot(p1);
+                break;
+            case TransitionReason.PromotionToManager:
+                asource.PlayOneShot(p2);
                 break;
         }
     }
