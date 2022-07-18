@@ -15,7 +15,7 @@ public class Inventory : MonoBehaviour
             return;
         }
 
-        ListOfPickableItems list = PickableItemManager.Instance.GenerateShoppingList(4);
+        ListOfPickableItems list = PickableItemManager.Instance.GenerateShoppingList(GameStateManager.Instance.GetOrderSize());
 
         foreach(var pickableItem in list.Items)
         {

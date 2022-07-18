@@ -81,6 +81,8 @@ public class UIScript : MonoBehaviour
         _playerPiss = Player.GetComponent<Piss>();
         Assert.IsNotNull(_playerPiss);
 
+        UpdateRemainingQuota();
+
         EventManager.Instance.OnShoppingListChanged += UpdateShoppingList;
         EventManager.Instance.OnPackageCompleted += UpdateRemainingQuota;
     }

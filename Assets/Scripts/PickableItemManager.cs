@@ -68,10 +68,12 @@ public class PickableItemManager : MonoBehaviour
         if(listSize > ItemList.Items.Count)
         {
             //We should be able to duplicate items though, I want to order 80 tails ya dig
-            throw new ArgumentException(String.Format(
+            Debug.LogWarning(String.Format(
                 "Cannot create a list of {0} items as there are only {1} unique items",
                 listSize,
                 ItemList.Items.Count));
+
+            listSize = (ushort) ItemList.Items.Count;
         }
 
         var rand = new System.Random();
@@ -82,8 +84,10 @@ public class PickableItemManager : MonoBehaviour
             randomizedItems.RemoveRange(listSize, ItemList.Items.Count - listSize);
         }
 
-        var shoppingList = new ListOfPickableItems();
-        shoppingList.Items = randomizedItems;
+        var shoppingList = new ListOfPickableItems()
+        {
+            Items = randomizedItems
+        };
 
         return shoppingList;
     }
