@@ -6,6 +6,13 @@ using UnityEngine.SceneManagement;
 public class Piss : MonoBehaviour
 {
     public PlayerCharacterController PlayerController;
+    public AudioSource PissAudioSource;
+    public AudioClip Unzip;
+    public AudioClip ToiletPissStart;
+    public AudioClip ToiletPissMiddle;
+    public AudioClip ToiletPissEnd;
+    public AudioClip Flush;
+    public AudioClip Zip;
 
     public float MaxPiss = 100f;
     public float PissGainPerSecond = 1f;
@@ -28,6 +35,37 @@ public class Piss : MonoBehaviour
 
             PlayerController.MovementFrozen = _pissing;
         }
+    }
+
+    IEnumerator PlayToiletPissAudio(float duration)
+    {
+        PissAudioSource.PlayOneShot(Unzip);
+        yield return new WaitForSeconds(Unzip.length);
+
+        PissAudioSource.PlayOneShot(ToiletPissStart);
+        yield return new WaitForSeconds(ToiletPissStart.length);
+
+        PissAudioSource.clip = ToiletPissMiddle;
+        PissAudioSource.loop = true;
+        PissAudioSource.Play();
+        yield return new WaitForSeconds(duration);
+
+        PissAudioSource.Stop();
+        PissAudioSource.loop = false;
+
+        PissAudioSource.PlayOneShot(ToiletPissEnd);
+        yield return new WaitForSeconds(ToiletPissEnd.length);
+
+        PissAudioSource.PlayOneShot(Flush);
+        yield return new WaitForSeconds(Flush.length);
+
+        PissAudioSource.PlayOneShot(Zip);
+        yield return new WaitForSeconds(Zip.length);
+    }
+
+    public void StartToiletPissCoroutine(float duration)
+    {
+        StartCoroutine(PlayToiletPissAudio(duration));
     }
 
     public void StartPissingNOW()
