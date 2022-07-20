@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-// using System.Linq;
+using System.Linq;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
@@ -25,8 +25,15 @@ public struct QTEButton
     public QTEStatus status;
 }
 
+public interface QTECallback
+{
+    public void OnQTEComplete();
+}
+
 public class QTEScript : MonoBehaviour
 {
+    public QTECallback callback;
+
     // static readonly KeyCode[] _allKeyCodes =
     //     System.Enum.GetValues(typeof(KeyCode))
     //     .Cast<KeyCode>()
@@ -139,6 +146,15 @@ public class QTEScript : MonoBehaviour
 
     // List of button prompts for the QTE sequence
     readonly List<QTEButton> _buttonPrompts = new();
+
+    public void AddRandomButtonPrompts(int number, float minDelay, float maxDelay)
+    {
+        for(int i = 0; i < number; i++)
+        {
+            KeyCode kc = KeyCodeMap.Keys.ToList()[UnityEngine.Random.Range(0, KeyCodeMap.Count)];
+            AddButtonPrompt(kc, UnityEngine.Random.Range(minDelay, maxDelay));
+        }
+    }
 
     public void AddButtonPrompt(KeyCode keyCode, float delay)
     {
@@ -269,6 +285,10 @@ public class QTEScript : MonoBehaviour
 
         if(_buttonPrompts.Count == 0)
         {
+            if (callback != null)
+            {
+                callback.OnQTEComplete();
+            }
             return;
         }
 
