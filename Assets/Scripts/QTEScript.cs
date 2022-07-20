@@ -49,7 +49,7 @@ public class QTEScript : MonoBehaviour
         {KeyCode.Delete, 'k'},
         {KeyCode.Tab, 'e'},
         {KeyCode.Return, 'a'},
-        {KeyCode.Escape, 'm'},
+        //{KeyCode.Escape, 'm'},
         {KeyCode.Space, 'w'},
         {KeyCode.UpArrow, 'q'},
         {KeyCode.DownArrow, 'r'},
