@@ -3535,6 +3535,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RoundTransitionDuration: 5
+  narrator: {fileID: 787449833}
+  announcement: {fileID: 787449832}
 --- !u!4 &787449831
 Transform:
   m_ObjectHideFlags: 0

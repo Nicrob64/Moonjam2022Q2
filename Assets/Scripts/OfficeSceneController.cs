@@ -56,6 +56,15 @@ public class OfficeSceneController : MonoBehaviour, QTECallback
         QTE.callback = this;
     }
 
+    void Start()
+    {
+        if (SceneTransitionHelper.Instance.TransitionReason == TransitionReason.Retry)
+        {
+            GetComponent<Cutscene>().shouldRun = false;
+            DoQuestion();
+        }
+    }
+
     public void DoQuestion()
     {
         canAnswer = true;
@@ -126,16 +135,13 @@ public class OfficeSceneController : MonoBehaviour, QTECallback
         }
 
         DoQTESession();
-
-        //qteCutscene.Reset();
-        //qteCutscene.Play();
     }
 
     public void DoQTESession()
     {
         QTE.Reset();
 
-        QTE.AddRandomButtonPrompts(Random.Range(3, 7), 0.4f, 1.5f);
+        QTE.AddRandomButtonPrompts(Random.Range(4, 10), 0.1f, 1.0f);
 
         currentSession++;
         QTE.Activate(3);

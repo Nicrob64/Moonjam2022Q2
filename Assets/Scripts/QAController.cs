@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 public class QAController : MonoBehaviour
 {
 
+    public InfractionWriter infractionWriter;
+    public Cutscene narrator;
 
     public int quotaRemaining = 20;
     public int failuresTillGameOver = 5;
@@ -62,6 +64,11 @@ public class QAController : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         StartCoroutine(NewBox());
+
+        if (SceneTransitionHelper.Instance.TransitionReason == TransitionReason.Retry)
+        {
+            narrator.shouldRun = false;
+        }
     }
     public void Update()
     {
@@ -153,6 +160,13 @@ public class QAController : MonoBehaviour
         if(accepted == isBadOrder)
         {
             failures++;
+            if (!accepted)
+            {
+                reasonForBadOrder = "Failure to send perfectly fine order to our dear customer.";
+            }
+            StartCoroutine(infractionWriter.Infraction(reasonForBadOrder));
+
+
             if(failures >= failuresTillGameOver)
             {
                 SceneTransitionHelper.Instance.FromScene = FromScene.QA;
@@ -245,29 +259,29 @@ public class QAController : MonoBehaviour
         PickableItemInfo added = pickable.GetRandomSingleItem(replaceItem);
         ListOfPickableItems otherList = pickable.GenerateNonUniqueItemList((ushort)Random.Range(1, maxItems));
 
-        int result = Random.Range(0, 7);
+        int result = Random.Range(0, 4);
         switch (result)
         {
             case 0:
                 items.Items.Remove(replaceItem);
                 items.Items.Add(added);
-                reasonForBadOrder = "Incorrect item list";
+                reasonForBadOrder = string.Format("Incorrect package contents. \n\n Item [{0}] replaced by [{1}].", replaceItem.ItemName, added.ItemName);
                 break;
             case 1:
                 if (items.Items.Count > 1)
                 {
-                    items.Items.RemoveAt(0);
-                    reasonForBadOrder = "Missing item";
+                    reasonForBadOrder = string.Format("Incorrect package contents. \n\n Missing item [{0}].", items.Items[0].ItemName);
+                    items.Items.RemoveAt(0);  
                 }
                 break;
             case 2:
                 added = pickable.GetRandomSingleItem();
                 items.Items.Add(added);
-                reasonForBadOrder = string.Format("Extra item - {0}", added.ItemName);
+                reasonForBadOrder = string.Format("Incorrect package contents. \n\n Additional item [{0}].", added.ItemName);
                 break;
             case 3:
                 items = otherList;
-                reasonForBadOrder = "Incorrect item list";
+                reasonForBadOrder = "Incorrect package contents. \n\n Wrong package list.";
                 break;
         }
 
@@ -291,36 +305,33 @@ public class QAController : MonoBehaviour
         switch (fieldToFuckUp)
         {
             case 0:
+                reasonForBadOrder = string.Format("Incorrect shipping label. \n\n Wrong name. [{0} {1}] -> [{2} {3}].", p.GivenName, p.Surname, p2.GivenName, p2.Surname);
                 p.GivenName = p2.GivenName;
                 p.Surname = p2.Surname;
-                reasonForBadOrder = "Wrong name on label";
-                break;
+                     break;
             case 1:
+                reasonForBadOrder = string.Format("Incorrect shipping label. \n\n Wrong street address. [{0}] -> [{1}]", p.StreetAddress, p2.StreetAddress);
                 p.StreetAddress = p2.StreetAddress;
-                reasonForBadOrder = "Wrong street address";
                 break;
             case 2:
+                reasonForBadOrder = string.Format("Incorrect shipping label. \n\n  Wrong city. [{0}] -> [{1}]", p.City, p2.City);
                 p.City = p2.City;
-                reasonForBadOrder = "Wrong city";
                 break;
             case 3:
                 if(p.ZipCode == p2.ZipCode)
                 {
-                    p.ZipCode = p.ZipCode + 1;
+                    p2.ZipCode = p2.ZipCode + 1;
                 }
-                else
-                {
-                    p.ZipCode = p2.ZipCode;
-                }
-                reasonForBadOrder = "Wrong zipcode";
+                reasonForBadOrder = string.Format("Incorrect shipping label. \n\n Wrong zipcode. [{0}] -> [{1}]", p.ZipCode, p2.ZipCode);
+                p.ZipCode = p2.ZipCode;
                 break;
             case 4:
+                reasonForBadOrder = string.Format("Incorrect shipping label. \n\n Wrong tracking code. [{0}] -> [{1}]", p.UPS, p2.UPS);
                 p.UPS = p2.UPS;
-                reasonForBadOrder = "Incorrect tracking code";
                 break;
             case 5:
+                reasonForBadOrder = string.Format("Incorrect shipping label. \n\n Wrong state. [{0}] -> [{1}]", p.State, p2.State);
                 p.State = p2.State;
-                reasonForBadOrder = "Wrong state";
                 break;
 
         }

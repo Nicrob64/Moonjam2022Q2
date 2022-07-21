@@ -52,6 +52,9 @@ public class GameStateManager : MonoBehaviour
 
     public float RoundTransitionDuration = 5.0f;
 
+    public Cutscene narrator;
+    public Announcement announcement;
+
     private void NextRound()
     {
         if(_currentRoundIndex >= _rounds.Length - 1)
@@ -123,6 +126,15 @@ public class GameStateManager : MonoBehaviour
         EventManager.Instance.OnRoundTransitionComplete += OnRoundTransitionComplete;
     }
 
+    private void Start()
+    {
+        if (SceneTransitionHelper.Instance.TransitionReason == TransitionReason.Retry)
+        {
+            narrator.shouldRun = false;
+            announcement.StartBGM();
+            announcement.StartAnnouncements();
+        }
+    }
 
     // Update is called once per frame
     void Update()

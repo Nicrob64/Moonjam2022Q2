@@ -410,86 +410,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &184070329
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 184070331}
-  - component: {fileID: 184070330}
-  m_Layer: 0
-  m_Name: DoTheQTE
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &184070330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 184070329}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d43c4bbc4d9b2944b66775c982966d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shouldRun: 0
-  events:
-  - time: 0
-    ev:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1557746471}
-          m_TargetAssemblyTypeName: OfficeSceneController, Assembly-CSharp
-          m_MethodName: DoQTESession
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    done: 0
-  - time: 15
-    ev:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1557746471}
-          m_TargetAssemblyTypeName: OfficeSceneController, Assembly-CSharp
-          m_MethodName: DoQuestion
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    done: 0
---- !u!4 &184070331
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 184070329}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.91972023, y: 1.1050968, z: -0.16907214}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &230225953
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2653,7 +2573,7 @@ MonoBehaviour:
   balance: 0
   prompt: {fileID: 1782292729}
   stats: {fileID: 753736516}
-  qteCutscene: {fileID: 184070330}
+  qteCutscene: {fileID: 0}
   corpoq:
   - Profits on all lubrication-based products increase by 0.69%. Attainment Chamber
     staff will be required to work an additional 45 minutes per shift.
@@ -3278,3 +3198,60 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4836093174739976, guid: 247e5b33a1b1dba43a82e14ad7191756, type: 3}
   m_PrefabInstance: {fileID: 2035376413}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2105551268
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6003274370629620473, guid: 7ccebd993500beb4a830c7a5af46df81, type: 3}
+      propertyPath: m_Name
+      value: MenuHolder
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726380579511020840, guid: 7ccebd993500beb4a830c7a5af46df81, type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726380579511020840, guid: 7ccebd993500beb4a830c7a5af46df81, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726380579511020840, guid: 7ccebd993500beb4a830c7a5af46df81, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726380579511020840, guid: 7ccebd993500beb4a830c7a5af46df81, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726380579511020840, guid: 7ccebd993500beb4a830c7a5af46df81, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726380579511020840, guid: 7ccebd993500beb4a830c7a5af46df81, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726380579511020840, guid: 7ccebd993500beb4a830c7a5af46df81, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726380579511020840, guid: 7ccebd993500beb4a830c7a5af46df81, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726380579511020840, guid: 7ccebd993500beb4a830c7a5af46df81, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726380579511020840, guid: 7ccebd993500beb4a830c7a5af46df81, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726380579511020840, guid: 7ccebd993500beb4a830c7a5af46df81, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7ccebd993500beb4a830c7a5af46df81, type: 3}

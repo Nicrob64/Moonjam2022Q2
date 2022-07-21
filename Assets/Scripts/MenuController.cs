@@ -71,7 +71,8 @@ public class MenuController : MonoBehaviour
 
     public void ToTitle()
     {
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene("TitleScreen");
+        HideMenu();
     }
 
     public void Quit()
